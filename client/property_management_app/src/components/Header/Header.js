@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AutoContext";
+
 export const Header = () => {
+    const { user } = useContext(AuthContext);
 
     return (
     <header className="navbar pcoded-header navbar-expand-lg navbar-light">
@@ -100,15 +105,14 @@ export const Header = () => {
                         <div className="dropdown-menu dropdown-menu-right profile-notification">
                             <div className="pro-head">
                                 <img src="assets/images/user/avatar-1.jpg" className="img-radius" alt="User-Profile-Image" />
-                                <span>John Doe</span>
-                                <a href="auth-signin.html" className="dud-logout" title="Logout">
+                                <span>{user.first_name} {user.last_name}</span>
+                                <Link to={'/logout'} className="dud-logout" title="Logout">
                                     <i className="feather icon-log-out"></i>
-                                </a>
+                                </Link>
                             </div>
                             <ul className="pro-body">
                                 <li><a href="javascript:" className="dropdown-item"><i className="feather icon-settings"></i> Settings</a></li>
                                 <li><a href="javascript:" className="dropdown-item"><i className="feather icon-user"></i> Profile</a></li>
-                                <li><a href="message.html" className="dropdown-item"><i className="feather icon-mail"></i> My Messages</a></li>
                                 <li><a href="auth-signin.html" className="dropdown-item"><i className="feather icon-lock"></i> Lock Screen</a></li>
                             </ul>
                         </div>

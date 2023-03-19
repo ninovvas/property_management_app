@@ -19,8 +19,9 @@ export const Login = () => {
 
         authService.login(email, password)
         .then(authData => {
+            //TODO: Error Message Validation
             userLogin(authData);
-            navigate('/');
+            navigate('/dashboard');
         })
         .catch(() => {
             navigate('/404');

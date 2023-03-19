@@ -10,6 +10,8 @@ import { Login } from './components/Login/Login';
 import { Home } from './components/Home/Home';
 import { NavigationMenu } from './components/Navigation/NavigationMenu';
 import { Register } from './components/Register/Register';
+import { Dashboard } from './components/Dashboard/Dashboard';
+import { Logout } from './components/Logout/Logout';
 
 function App() {
       const isLogged = true;
@@ -24,16 +26,15 @@ function App() {
       };
 
       return (
-        <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}> //, userLogin, userLogout
+        <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
           <>
-            {!isLogged && <NavigationMenu />}
-            {!isLogged && <Header />}
-
             <Routes>
               <Route path='*' element={<h1>404</h1>} />
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>
+              <Route path='/dashboard' element={<Dashboard />}></Route>
+              <Route path='/logout' element={<Logout />}></Route>
             </Routes>
           </>
         </AuthContext.Provider>

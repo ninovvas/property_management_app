@@ -60,7 +60,7 @@ export const Register = () =>{
         authService.register(email, username,firstName, lastName, address, password, confirmPassword)
         .then(authData => {
             userLogin(authData);
-            navigate('/');
+            navigate('/dashboard');
         })
 
 
