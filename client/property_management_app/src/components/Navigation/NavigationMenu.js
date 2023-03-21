@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export const NavigationMenu = () => {
     return (
         <nav className="pcoded-navbar">
@@ -17,8 +18,13 @@ export const NavigationMenu = () => {
                             <label>Administration</label>
                         </li>
                         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" className="nav-item">
-                            <a href="index.html" className="nav-link "><span className="pcoded-micon"><i className="feather icon-home"></i></span><span className="pcoded-mtext">Dashboard</span></a>
+                            <Link to={"/dashboard"} className="nav-link "><span className="pcoded-micon"><i className="feather icon-home"></i></span><span className="pcoded-mtext">Dashboard</span></Link>
                         </li>
+
+                        <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" className="nav-item">
+                            <Link to={"/create_object"} className="nav-link "><span className="pcoded-micon"><i className="feather plus-square"></i></span><span className="pcoded-mtext">Object</span></Link>
+                        </li>
+
                         <li className="nav-item pcoded-menu-caption">
                             <label>UI Element</label>
                         </li>

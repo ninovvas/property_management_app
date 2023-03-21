@@ -12,6 +12,7 @@ import { NavigationMenu } from './components/Navigation/NavigationMenu';
 import { Register } from './components/Register/Register';
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { Logout } from './components/Logout/Logout';
+import { CreateObject } from './components/CreateObject/CreateObject';
 
 function App() {
       const isLogged = true;
@@ -25,6 +26,11 @@ function App() {
           setAuth({});
       };
 
+      const context = {
+        userLogin,
+        userLogout,
+      }
+
       return (
         <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
           <>
@@ -35,6 +41,7 @@ function App() {
               <Route path='/register' element={<Register />}></Route>
               <Route path='/dashboard' element={<Dashboard />}></Route>
               <Route path='/logout' element={<Logout />}></Route>
+              <Route path='/create_object/' element={<CreateObject />}></Route>
             </Routes>
           </>
         </AuthContext.Provider>
