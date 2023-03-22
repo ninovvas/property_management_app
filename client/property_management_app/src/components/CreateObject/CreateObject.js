@@ -21,12 +21,18 @@ export const CreateObject = () => {
 
     
       const countries = Country.getAllCountries();
-      const states = State.getAllStates()
-      console.log(states);
+      const states = State.getAllStates();
+      //const cities = City.getAllCities()
+     //console.log(cities);
+      //console.log(countries);
+      //const states = State.get;
+      //console.log(states);
       const availableState = countries.find((c) => c.name == selectedCountry)
-      console.log(selectedState);
-      const availableCity = states.find((s) => s.name === selectedState);
-      console.log(availableCity)
+      //console.log(selectedState);
+      const availableCity = states.find((s) => s.name == selectedState);
+      //console.log(availableCity)
+      //const citiesTest = City.getCitiesOfState(availableCity?.countryCode, availableCity?.isoCode)
+      //console.log(citiesTest)
 
     //   const updatedCountries = countries.map((country) => ({
     //     key: country.id,
@@ -146,7 +152,7 @@ export const CreateObject = () => {
                                                         onChange={onSelectedCity}
                                                         >
                                                          <option>--Choose City--</option>
-                                                        { City.getCitiesOfState(availableCity?.countryCode, availableCity?.stateCode).map((e, key) => {
+                                                        { City.getCitiesOfState(availableCity?.countryCode, availableCity?.isoCode).map((e, key) => {
                                                             return (
                                                             <option value={e.name} key={key}>
                                                                 {e.name}
