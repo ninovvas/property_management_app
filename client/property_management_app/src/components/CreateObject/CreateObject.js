@@ -17,10 +17,15 @@ export const CreateObject = () => {
 
     const [formData, setFormData] = useState({
         street: "",
-        streetNumber: 0,
+        streetNumber: "",
         country: "",
         state: "",
-        city: ""
+        city: "",
+        residentialUnits: 0,
+        commercialProperties: 0,
+        garages: 0,
+        others: 0,
+        objectType: ""
     });
 
     const nextStep = () => {
