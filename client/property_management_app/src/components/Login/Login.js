@@ -4,38 +4,44 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import {AuthContext} from "../../contexts/AutoContext"
-import * as authService from "../../services/authService";
+import { useForm } from "../../hooks/useForm";
+//import * as authService from "../../services/authService";
 
 export const Login = () => {
-    const { userLogin } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const { onLoginSubmit } = useContext(AuthContext);
+    // const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
 
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    // const onSubmit = (e) => {
+    //     e.preventDefault();
 
-        authService.login(email, password)
-        .then(authData => {
-            //TODO: Error Message Validation
-            userLogin(authData);
-            navigate('/dashboard');
-        })
-        .catch(() => {
-            navigate('/404');
-        })
+    //     authService.login(email, password)
+    //     .then(authData => {
+    //         //TODO: Error Message Validation
+    //         userLogin(authData);
+    //         navigate('/dashboard');
+    //     })
+    //     .catch(() => {
+    //         navigate('/404');
+    //     })
 
-    }
+    // }
 
-    const onEmailChange = (e) => {
-        setEmail(e.target.value);
-    }
+    const { values, changeHandler, onSubmit } = useForm({
+        email: '',
+        password: '',
+    }, onLoginSubmit);
 
-    const onPasswordChange = (e) => {
-        setPassword(e.target.value);
-    }
+    // const onEmailChange = (e) => {
+    //     setEmail(e.target.value);
+    // }
+
+    // const onPasswordChange = (e) => {
+    //     setPassword(e.target.value);
+    // }
 
     return (
         <>
@@ -71,10 +77,10 @@ export const Login = () => {
                                 type="email" 
                                 className="form-control" 
                                 placeholder="Email" 
-                                name="login"
-                                id="login"
-                                value={email}
-                                onChange={onEmailChange}/>
+                                name="email"
+                                id="email"
+                                value={values.email}
+                                onChange={changeHandler}/>
                             </div>
                             <div className="input-group mb-4">
                                 <input 
@@ -83,12 +89,12 @@ export const Login = () => {
                                 placeholder="password" 
                                 name="password"
                                 id="password"
-                                value={password}
-                                onChange={onPasswordChange}
+                                value={values.password}
+                                onChange={changeHandler}
                                 />
                             </div>
                             <button className="btn btn-primary shadow-2 mb-4">Login</button>
-                            <p className="mb-0 text-muted">Don’t have an account? <a href="auth-signup.html">Signup</a></p>
+                            <p className="mb-0 text-muted">Don’t have an account? <Link to={"/register"}>Register</Link></p>
                         </div>
                     </div>
                 </div>

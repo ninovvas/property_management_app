@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AutoContext";
 
 export const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { firstName, lastName } = useContext(AuthContext);
 
     return (
     <header className="navbar pcoded-header navbar-expand-lg navbar-light">
@@ -105,7 +105,7 @@ export const Header = () => {
                         <div className="dropdown-menu dropdown-menu-right profile-notification">
                             <div className="pro-head">
                                 <img src="assets/images/user/avatar-1.jpg" className="img-radius" alt="User-Profile-Image" />
-                                <span>{user.first_name} {user.last_name}</span>
+                                <span>{firstName} {lastName}</span>
                                 <Link to={'/logout'} className="dud-logout" title="Logout">
                                     <i className="feather icon-log-out"></i>
                                 </Link>

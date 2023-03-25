@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 
-import { Country, State, City }  from 'country-state-city';
-
-
-import Select from "react-select";
 import { Address } from "./Address/Address";
 import { Object } from "./Object/Object";
+import { ObjectConfirm } from "./ObjectConfirm/ObjectConfirm";
+import { AuthContext } from "../../contexts/AutoContext";
 
 
-export const CreateObject = () => {
-
+export const CreateObject = ({
+    onCreatePropertySubmit
+}) => {
+    const { userId } = useContext(AuthContext);
 
     const [step, setStep] = useState(1);
 
@@ -21,11 +21,10 @@ export const CreateObject = () => {
         country: "",
         state: "",
         city: "",
-        residentialUnits: 0,
-        commercialProperties: 0,
-        garages: 0,
-        others: 0,
-        objectType: ""
+        objectRelation: "",
+        objectType: "",
+        userId
+       
     });
 
     const nextStep = () => {
@@ -66,6 +65,14 @@ export const CreateObject = () => {
             <NavigationMenu />
             <Header />
             <Object nextStep={nextStep} prevStep={prevStep} handleFormData={handleInputData} values={formData} />
+        </>
+      );
+      case 3:
+      return (
+        <>
+            <NavigationMenu />
+            <Header />
+            <ObjectConfirm prevStep={prevStep} values={formData} onCreatePropertySubmit={onCreatePropertySubmit} />
         </>
       );
     // default case to show nothing

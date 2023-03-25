@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
 
 const propertySchema = new mongoose.Schema({
+
     street: {
         type: String,
         required: true
@@ -10,15 +11,15 @@ const propertySchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    country: {
+        type: String,
+        required: true
+    },
     state: {
         type: String,
         required: true
     },
-    zipCode: {
-        type: Number,
-        required: true
-    },
-    country: {
+    city: {
         type: String,
         required: true
     },
@@ -26,11 +27,10 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    type :{
-        type: [{type:String}],
+    objectRelation: {
+        type: String,
         required: true
     },
-
     userId: {
         type: ObjectId,
         ref: "User"

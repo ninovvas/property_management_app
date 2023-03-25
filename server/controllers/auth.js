@@ -32,7 +32,8 @@ function register(req, res, next) {
             if (process.env.NODE_ENV === 'production') {
                 res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
             } else {
-                res.cookie(authCookieName, token, { httpOnly: true })
+                res.cookie(authCookieName, token, { httpOnly: true });
+                user['accessToken'] = token;
             }
             res.status(200)
                 //.set('Access-Control-Allow-Origin', '*')
@@ -72,12 +73,18 @@ function login(req, res, next) {
             user = removePassword(user);
 
             const token = utils.jwt.createToken({ id: user._id });
+            console.log(token);
+            
 
             if (process.env.NODE_ENV === 'production') {
                 res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
             } else {
+                user['accessToken'] = token;
+                console.log(user);
+
                 res.cookie(authCookieName, token, { httpOnly: true })
             }
+            console.log(res)
             res.status(200)
                 //.set('Access-Control-Allow-Origin', '*')
                 //.set("Access-Control-Allow-Headers", "X-Requested-With")
@@ -87,6 +94,7 @@ function login(req, res, next) {
 }
 
 function logout(req, res) {
+    console.log(req);
     const token = req.cookies[authCookieName];
 
     tokenBlacklistModel.create({ token })

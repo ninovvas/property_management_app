@@ -12,10 +12,23 @@ export const Address = ({nextStep, handleFormData, values}) => {
     const [errors, setErrors] = useState({
         errStreet: false,
         errStreetNumber: false,
+        errCountry: false,
         errState: false,
         errCity: false
     });
 
+    console.log(errors);
+
+    // const [buttonStatus, setButtonStatus] = useState(false);
+    // //let buttonStatus;
+    // if (errors.errCity && errors.errCountry && errors.errState && errors.errStreet && errors.errStreetNumber) {
+    //     //buttonStatus = false;
+    //     setButtonStatus(true);
+    // } else {
+    //     //buttonStatus = false;
+    //     setButtonStatus(false);
+    // }
+    // console.log(buttonStatus)
     // const [selectedCountry, setSelectedCountry] = useState("");
     // const [selectedState, setSelectedState] = useState("");
     // const [selectedCity, setSelectedCity] = useState("");
@@ -82,7 +95,7 @@ export const Address = ({nextStep, handleFormData, values}) => {
         }
        // nextStep()
       };
-
+     
         //const availableState = countries.find((c) => c.name === selectedCountry);
        
 
@@ -120,13 +133,13 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                                                 <label for="street">Street</label>
                                                                 <input 
                                                                 type="text" 
-                                                                className={validator.isEmpty(values.street) && errors.errStreet? "form-control is-invalid": "form-control"}  
+                                                                className={validator.isEmpty(values.street) && errors.errStreet ? "form-control is-invalid": "form-control"}  
                                                                 name="street" 
                                                                 id="street" 
                                                                 placeholder="Street"
                                                                 value={values.street}
                                                                 onChange={handleFormData("street")} 
-                                                                onBlur={() => setErrors({errStreet:true})}/>
+                                                                onBlur={() => setErrors({...errors, errStreet:true})}/>
                                                                 {validator.isEmpty(values.street) && errors.errStreet ? (
                                                                 <div className="invalid-feedback">
                                                                 This is a required field
@@ -137,13 +150,14 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                                                 <label for="streetNumber">Street number</label>
                                                                 <input 
                                                                 type="number" 
-                                                                className={validator.isEmpty(values.streetNumber) ? "form-control is-invalid": "form-control"} 
+                                                                className={validator.isEmpty(values.streetNumber) && errors.errStreetNumber ? "form-control is-invalid": "form-control"} 
                                                                 name="streetNumber" 
                                                                 id="streetNumber" 
                                                                 placeholder="Street number"
                                                                 value={values.streetNumber}
-                                                                onChange={handleFormData("streetNumber")} />
-                                                                {validator.isEmpty(values.streetNumber) ? (
+                                                                onChange={handleFormData("streetNumber")}
+                                                                onBlur={() => setErrors({...errors, errStreetNumber:true})} />
+                                                                {validator.isEmpty(values.streetNumber) && errors.errStreetNumber ? (
                                                                 <div className="invalid-feedback">
                                                                     This is a required field
                                                                 </div>
@@ -152,11 +166,12 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                                         </div>
                                                         <label forHtml="country">Country</label>
                                                         <select 
-                                                            className={validator.isEmpty(values.country) ? "form-control is-invalid": "form-control"} 
+                                                            className={validator.isEmpty(values.country) && errors.errCountry ? "form-control is-invalid": "form-control"} 
                                                             id="country" 
                                                             name="country"
                                                             value={values.country}
                                                             onChange={handleFormData("country")}
+                                                            onBlur={() => setErrors({...errors, errCountry:true})}
                                                             >
                                                                  <option value="ChooseCountry" key="chooseCountry">--Choose Country--</option>
                                                                 {countries.map((value, key) => {
@@ -168,7 +183,7 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                                                     );
                                                                 })}
                                                         </select>
-                                                        {validator.isEmpty(values.country) ? (
+                                                        {validator.isEmpty(values.country) && errors.errCountry ? (
                                                                 <div className="invalid-feedback">
                                                                     This is a required field
                                                                 </div>
@@ -178,10 +193,11 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                                         <select
                                                             id="state"
                                                             name="state"
-                                                            className={validator.isEmpty(values.state) ? "form-control is-invalid": "form-control"}  
+                                                            className={validator.isEmpty(values.state) && errors.errState ? "form-control is-invalid": "form-control"}  
                                                         
                                                             value={values.state}
                                                             onChange={handleFormData("state")}
+                                                            onBlur={() => setErrors({...errors, errState:true})}
                                                             >
                                                             <option value="ChooseState" key="chooseState">--Choose State--</option>
                                                             { State.getStatesOfCountry(availableState?.isoCode).map((e, key) => {
@@ -192,7 +208,7 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                                                 );
                                                             })}
                                                         </select>
-                                                        {validator.isEmpty(values.state) ? (
+                                                        {validator.isEmpty(values.state) && errors.errState ? (
                                                                 <div className="invalid-feedback">
                                                                     This is a required field
                                                                 </div>
@@ -202,9 +218,10 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                                         <select
                                                             id="city"
                                                             name="city"
-                                                            className={validator.isEmpty(values.city) ? "form-control is-invalid": "form-control"}  
+                                                            className={validator.isEmpty(values.city) && errors.errCity ? "form-control is-invalid": "form-control"}  
                                                             value={values.city}
                                                             onChange={handleFormData("city")}
+                                                            onBlur={() => setErrors({...errors, errCity:true})}
                                                             >
                                                             <option value="ChooseCity" key="chooseCity">--Choose City--</option>
                                                             { City.getCitiesOfState(availableCity?.countryCode, availableCity?.isoCode).map((e, key) => {
@@ -215,14 +232,20 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                                                 );
                                                             })}
                                                         </select>
-                                                        {validator.isEmpty(values.city) ? (
+                                                        {validator.isEmpty(values.city) && errors.errCity ? (
                                                                 <div className="invalid-feedback">
                                                                     This is a required field
                                                                 </div>
                                                                     ) : ("")}
                                                         
-                                                        <button type="submit" variant="primary" className="btn btn-primary">Continue</button>
-                                                            
+                                                        {validator.isEmpty(values.street) ||
+                                                        validator.isEmpty(values.streetNumber) ||
+                                                        validator.isEmpty(values.country) ||
+                                                         validator.isEmpty(values.state) ||
+                                                        validator.isEmpty(values.city) ? (<button type="submit" variant="primary"  className="btn btn-primary" disabled >Continue to Object</button>) :
+                                                        (<button type="submit" variant="primary"  className="btn btn-primary">Continue to Object</button>)
+
+                                                        }
                                                         
                                                     </form>
                                                 </div>
