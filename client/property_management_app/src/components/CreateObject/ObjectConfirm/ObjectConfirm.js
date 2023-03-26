@@ -1,20 +1,21 @@
 
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-//import { AuthContext } from "../../../contexts/AutoContext";
+import { AuthContext } from "../../../contexts/AutoContext";
+
 
 
 
 import * as propertyService from "../../../services/propertyService";
 
-export const ObjectConfirm = ({prevStep, values, onCreatePropertySubmit}) => {
-   
-    const navigate = useNavigate();
+export const ObjectConfirm = ({prevStep, values}) => {
+    
+    const { onCreatePropertySubmit } = useContext(AuthContext);
+  
 
 
     const submitFormData = (e) => {
        
-        // e.preventDefault();
+        e.preventDefault();
 
         
         // propertyService.createObject(values)
@@ -22,8 +23,10 @@ export const ObjectConfirm = ({prevStep, values, onCreatePropertySubmit}) => {
         //     console.log(propertyData);
         //     navigate("/dashboard");
         // })
+        console.log("values");
+        console.log(values);
 
-        onCreatePropertySubmit()
+        onCreatePropertySubmit(values);
 
     
     

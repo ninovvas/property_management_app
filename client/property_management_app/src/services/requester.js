@@ -51,7 +51,7 @@ const request = async (method, token, url, data) => {
                
                 
             };
-            options.credentials = 'include';
+            //options.credentials = 'include';
             options.body = JSON.stringify(data);
         }
     }
@@ -59,16 +59,15 @@ const request = async (method, token, url, data) => {
     if (token) {
          options.headers = {
              ...options.headers,
-             'X-Authorization': token,
-
+             //'X-Authorization': token,
            
          };
-        
+         //options.credentials = 'include';
 
     }
 
    
-
+    options.credentials = 'include';
     console.log(url);
     console.log(options);
     const response = await fetch(url, options);

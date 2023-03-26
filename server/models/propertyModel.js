@@ -23,11 +23,11 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    objectType: {
+    objectRelation: {
         type: String,
         required: true
     },
-    objectRelation: {
+    objectType: {
         type: String,
         required: true
     },

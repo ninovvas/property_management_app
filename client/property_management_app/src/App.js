@@ -1,11 +1,11 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from './contexts/AutoContext';
-import Cookies from 'universal-cookie';
+//import Cookies from 'universal-cookie';
 
 import './App.css';
-//import { useLocalStorage } from "./hooks/useLocalStorage";
-
+import { useLocalStorage } from "./hooks/useLocalStorage";
+//import Cookies from 'js-cookie';
 import { Header } from './components/Header/Header';
 import { Login } from './components/Login/Login';
 import { Home } from './components/Home/Home';
@@ -17,17 +17,25 @@ import { CreateObject } from './components/CreateObject/CreateObject';
 import { propertyServiceFactory } from './services/propertyService';
 import { authServiceFactory } from './services/authService';
 import { useState } from 'react';
+import { useCookies } from "react-cookie";
 
 function App() {
+
+  const [cookies] = useCookies();
       //const isLogged = true;
-      //const [auth, setAuth] = useLocalStorage('auth', {});
+      //const cookies = new Cookies();
+     
+      
       const navigate = useNavigate();
-      const [auth, setAuth] = useState({});
+      //const [auth, setAuth] = useState({});
+      const [auth, setAuth] = useLocalStorage('accessToken', {});
       const [properties, setProperties] = useState([]);
       const propertyService = propertyServiceFactory(auth.accessToken);
     const authService = authServiceFactory(auth.accessToken)
+    
 
-    console.log(auth);
+    console.log("accessToken");
+    console.log(auth.accessToken);
 
       // const userLogin = (authData) => {
       //   setAuth(authData);
@@ -40,7 +48,7 @@ function App() {
       const onLoginSubmit = async (data) => {
         try {
             const result = await authService.login(data);
-            console.log(result);
+            console.log(auth.accessToken);
             setAuth(result);
 
             navigate('/dashboard');
@@ -77,14 +85,16 @@ function App() {
         const result = await authService.logout();
         console.log(result);
         //cookies.remove('accessToken');
-        //setAuth({});
+        setAuth({});
     };
 
 
     const onCreatePropertySubmit = async (data) => {
       const newProperty = await propertyService.createObject(data);
-
-      setProperties(state => [...state, newProperty]);
+      console.log("newProperty")
+      console.log(newProperty)
+      //setProperties
+      setProperties((state) => [{...state, newProperty}]);
 
       navigate('/dashboard');
   };
@@ -94,6 +104,7 @@ function App() {
         onLoginSubmit,
         onRegisterSubmit,
         onLogout,
+        onCreatePropertySubmit,
         firstName: auth.first_name,
         lastName: auth.last_name,
         address: auth.address,
@@ -112,7 +123,7 @@ function App() {
               <Route path='/register' element={<Register />}></Route>
               <Route path='/dashboard' element={<Dashboard />}></Route>
               <Route path='/logout' element={<Logout />}></Route>
-              <Route path='/create_object/' element={<CreateObject onCreatePropertySubmit={onCreatePropertySubmit}/>}></Route>
+              <Route path='/create_object/' element={<CreateObject />}></Route>
             </Routes>
           </>
         </AuthContext.Provider>

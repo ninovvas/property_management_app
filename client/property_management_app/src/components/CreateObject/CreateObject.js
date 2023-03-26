@@ -8,9 +8,7 @@ import { ObjectConfirm } from "./ObjectConfirm/ObjectConfirm";
 import { AuthContext } from "../../contexts/AutoContext";
 
 
-export const CreateObject = ({
-    onCreatePropertySubmit
-}) => {
+export const CreateObject = () => {
     const { userId } = useContext(AuthContext);
 
     const [step, setStep] = useState(1);
@@ -72,7 +70,7 @@ export const CreateObject = ({
         <>
             <NavigationMenu />
             <Header />
-            <ObjectConfirm prevStep={prevStep} values={formData} onCreatePropertySubmit={onCreatePropertySubmit} />
+            <ObjectConfirm prevStep={prevStep} values={formData} />
         </>
       );
     // default case to show nothing

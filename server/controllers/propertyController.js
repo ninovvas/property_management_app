@@ -1,9 +1,10 @@
 const  {propertyModel, userModel} = require("../models");
 
 
-function newProperty(street, streetNumber, country, state, city, objectType, objectRelation, userId) {
-    return propertyModel.create({street, streetNumber, country, state, city, objectType, objectRelation, userId })
+function newProperty(street, streetNumber, country, state, city, objectRelation, objectType, userId) {
+    return propertyModel.create({street, streetNumber, country, state, city, objectRelation, objectType, userId })
         .then(property => {
+            console.log(property);
             return Promise.all([
                 userModel.updateOne({ _id: userId }, { $push: { properties: property._id } }),
                 //thumbnailModel.findByIdAndUpdate({ _id: thumbnailId },{ $push: { thumbnailId: thumbnailId}}, { new: true }),
@@ -26,8 +27,12 @@ function createProperty(req, res, next) {
     console.log("------------")
     console.log(req.body);
 
-    newProperty(street, streetNumber, country, state, city, objectType, objectRelation, userId)
-        .then(([_, updatedProperty]) => res.status(200).json(updatedProperty))
+    newProperty(street, streetNumber, country, state, city, objectRelation, objectType, userId)
+        .then((updatedProperty) => {
+            console.log(updatedProperty);
+            res.status(200).json(updatedProperty);
+            
+        })
         .catch(next);
         
 }

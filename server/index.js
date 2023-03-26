@@ -16,7 +16,8 @@ dbConnector()
 
     app.use(cors({
       origin: config.origin,
-      credentials: true
+      credentials: true,
+      exposedHeaders: ['Set-Cookie', 'Date', 'ETag']
     }));
 
     app.use('/api', apiRouter);
