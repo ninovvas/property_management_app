@@ -33,7 +33,7 @@ function register(req, res, next) {
                 res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
             } else {
                 res.cookie(authCookieName, token, { httpOnly: true });
-                user['accessToken'] = token;
+                createdUser['accessToken'] = token;
             }
             res.status(200)
                 //.set('Access-Control-Allow-Origin', '*')
@@ -80,11 +80,11 @@ function login(req, res, next) {
                 res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
             } else {
                 user['accessToken'] = token;
-                console.log(user);
+                //console.log(user);
 
-                res.cookie(authCookieName, token, { httpOnly: true })
+                res.cookie(authCookieName, token);
+                console.log(res.cookie(authCookieName, token, {httpOnly: true}));
             }
-            console.log(res)
             res.status(200)
                 //.set('Access-Control-Allow-Origin', '*')
                 //.set("Access-Control-Allow-Headers", "X-Requested-With")
@@ -96,6 +96,8 @@ function login(req, res, next) {
 function logout(req, res) {
     console.log(req);
     const token = req.cookies[authCookieName];
+    console.log("Logout");
+    console.log(token);
 
     tokenBlacklistModel.create({ token })
         .then(() => {

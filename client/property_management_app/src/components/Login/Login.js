@@ -58,7 +58,7 @@ export const Login = () => {
 
         <div className="auth-wrapper">
             
-            <form id="login" onSubmit={onSubmit}>
+            <form id="login" method="POST" onSubmit={onSubmit}>
                 <div className="auth-content">
                     <div className="auth-bg">
                         <span className="r"></span>

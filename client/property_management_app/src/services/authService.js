@@ -1,7 +1,7 @@
 
 import { requestFactory } from './requester';
 
-const baseUrl = `http://localhost:3005/api`;
+const baseUrl = `http://localhost:3000/api`;
 
 export const authServiceFactory = (token) => {
     const request = requestFactory(token);
@@ -9,7 +9,7 @@ export const authServiceFactory = (token) => {
     return {
         login: (data) => request.post(`${baseUrl}/login`, data ),
         register: (data) => request.post(`${baseUrl}/register`,  data),
-        logout: () => request.get(`${baseUrl}/logout`),
+        logout: () => request.post(`${baseUrl}/logout`),
     }
 };
 

@@ -1,6 +1,7 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from './contexts/AutoContext';
+import Cookies from 'universal-cookie';
 
 import './App.css';
 //import { useLocalStorage } from "./hooks/useLocalStorage";
@@ -25,7 +26,7 @@ function App() {
       const [properties, setProperties] = useState([]);
       const propertyService = propertyServiceFactory(auth.accessToken);
     const authService = authServiceFactory(auth.accessToken)
-    
+
     console.log(auth);
 
       // const userLogin = (authData) => {
@@ -51,6 +52,7 @@ function App() {
     };
 
     const onRegisterSubmit = async (values) => {
+      
       const { confirmPassword, ...registerData } = values;
       if (confirmPassword !== registerData.password) {
           return;
@@ -72,9 +74,10 @@ function App() {
 
 
       const onLogout = async () => {
-        await authService.logout();
-
-        setAuth({});
+        const result = await authService.logout();
+        console.log(result);
+        //cookies.remove('accessToken');
+        //setAuth({});
     };
 
 

@@ -99,7 +99,7 @@ export const ObjectConfirm = ({prevStep, values, onCreatePropertySubmit}) => {
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <form onSubmit={submitFormData}>
+                                                    <form method="POST" onSubmit={submitFormData}>
                                                     
                                                         <button variant="primary" className="btn btn-primary" onClick={prevStep}>Back to Object</button>
                                                         <button variant="primary" type="submit"  className="btn btn-success">Create Object</button>

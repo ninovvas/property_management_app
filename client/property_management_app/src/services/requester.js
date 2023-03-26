@@ -48,18 +48,26 @@ const request = async (method, token, url, data) => {
         if (data) {
             options.headers = {
                 'content-type': 'application/json',
+               
+                
             };
-
+            options.credentials = 'include';
             options.body = JSON.stringify(data);
         }
     }
 
     if (token) {
-        options.headers = {
-            ...options.headers,
-            'X-Authorization': token,
-        };
+         options.headers = {
+             ...options.headers,
+             'X-Authorization': token,
+
+           
+         };
+        
+
     }
+
+   
 
     console.log(url);
     console.log(options);
@@ -87,7 +95,7 @@ const request = async (method, token, url, data) => {
 // export const del = request.bind({}, 'DELETE');
 
 export const requestFactory = (token) => {
-    console.log('token' +  token);
+    console.log('token: ' +  token);
     return {
         get: request.bind(null, 'GET', token),
         post: request.bind(null, 'POST', token),
