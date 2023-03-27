@@ -13,6 +13,19 @@ function newProperty(street, streetNumber, country, state, city, objectRelation,
         })
 }
 
+function getAllProperties(req, res, next) {
+    const { _id: userId } = req.user;
+    //const { userId } = req.user;
+    console.log(userId);
+    propertyModel.find({userId})
+        .sort({ created_at: -1 })
+        //.populate('thumbnailId userId')
+        .then(properties => {
+            res.status(200).json(properties)
+        })
+        .catch(next);
+}
+
 
 function createProperty(req, res, next) {
     const { street } = req.body;
@@ -39,4 +52,5 @@ function createProperty(req, res, next) {
 
 module.exports = {
     createProperty,
+    getAllProperties
 }

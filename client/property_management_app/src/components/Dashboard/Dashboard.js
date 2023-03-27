@@ -5,7 +5,8 @@ export const Dashboard = () => {
     return (
         <>
         <NavigationMenu />
-        <Header />
-        </>
+            <Header />
+       <h1>Dashboard</h1>
+       </>
     );
 }

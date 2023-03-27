@@ -14,10 +14,22 @@ export const propertyServiceFactory = (token) => {
         return result;
     };
 
-    return {
-        createObject
+    const getAllProperties = async () => {
+        const result = await request.get(url);
+        console.log(result);
+        const properties = Object.values(result);
+    
+        return properties;
     };
 
+
+    return {
+        createObject,
+        getAllProperties
+    };
+
+
+    
 }
 
 

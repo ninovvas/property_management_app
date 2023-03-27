@@ -16,8 +16,10 @@ import { Logout } from './components/Logout/Logout';
 import { CreateObject } from './components/CreateObject/CreateObject';
 import { propertyServiceFactory } from './services/propertyService';
 import { authServiceFactory } from './services/authService';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from "react-cookie";
+import { Property } from './components/Property/Property';
+import { NavigationMenu } from './components/Navigation/NavigationMenu';
 
 function App() {
 
@@ -29,7 +31,7 @@ function App() {
       const navigate = useNavigate();
       //const [auth, setAuth] = useState({});
       const [auth, setAuth] = useLocalStorage('accessToken', {});
-      const [properties, setProperties] = useState([]);
+      
       const propertyService = propertyServiceFactory(auth.accessToken);
     const authService = authServiceFactory(auth.accessToken)
     
@@ -44,6 +46,8 @@ function App() {
       // const userLogout = () => {
       //     setAuth({});
       // };
+
+      
 
       const onLoginSubmit = async (data) => {
         try {
@@ -94,7 +98,7 @@ function App() {
       console.log("newProperty")
       console.log(newProperty)
       //setProperties
-      setProperties((state) => [{...state, newProperty}]);
+      //setProperties((state) => [{...state, newProperty}]);
 
       navigate('/dashboard');
   };
@@ -116,6 +120,7 @@ function App() {
       return (
         <AuthContext.Provider value={contextValues}>
           <>
+         
             <Routes>
               <Route path='*' element={<h1>404</h1>} />
               <Route path='/' element={<Home />} />
@@ -123,6 +128,7 @@ function App() {
               <Route path='/register' element={<Register />}></Route>
               <Route path='/dashboard' element={<Dashboard />}></Route>
               <Route path='/logout' element={<Logout />}></Route>
+              <Route path='/property/' element={<Property propertyService={propertyService}/>}></Route>
               <Route path='/create_object/' element={<CreateObject />}></Route>
             </Routes>
           </>
