@@ -22,7 +22,7 @@ export const NavigationMenu = () => {
                         </li>
 
                         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" className="nav-item">
-                            <Link to={"/create_object"} className="nav-link "><span className="pcoded-micon"><i className="fas fa-plus-circle"></i></span><span className="pcoded-mtext">Create Property</span></Link>
+                            <Link to={"/create_property"} className="nav-link "><span className="pcoded-micon"><i className="fas fa-plus-circle"></i></span><span className="pcoded-mtext">Create Property</span></Link>
                         </li>
 
                         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" className="nav-item">

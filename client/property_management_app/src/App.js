@@ -20,6 +20,9 @@ import { useEffect, useState } from 'react';
 import { useCookies } from "react-cookie";
 import { Property } from './components/Property/Property';
 import { NavigationMenu } from './components/Navigation/NavigationMenu';
+import { RouteGuard } from './components/common/RouteGuard';
+import { PropertyDetails } from './components/PropertyDetails/PropertyDetails';
+import { EditProperty } from './components/EditProperty/EditProperty';
 
 function App() {
 
@@ -126,10 +129,14 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>
-              <Route path='/dashboard' element={<Dashboard />}></Route>
-              <Route path='/logout' element={<Logout />}></Route>
-              <Route path='/property/' element={<Property propertyService={propertyService}/>}></Route>
-              <Route path='/create_object/' element={<CreateObject />}></Route>
+              <Route element={<RouteGuard />}>
+                <Route path='/dashboard' element={<Dashboard />}></Route>
+                <Route path='/logout' element={<Logout />}></Route>
+                <Route path='/property/' element={<Property propertyService={propertyService}/>}></Route>
+                <Route path='/create_property/' element={<CreateObject />}></Route>
+                <Route path='/property/details/:propertyId' element={<PropertyDetails propertyService={propertyService}/>} />
+                <Route path='/property/edit/:propertyId' element={<EditProperty propertyService={propertyService}/>} />
+              </Route>
             </Routes>
           </>
         </AuthContext.Provider>

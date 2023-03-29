@@ -20,7 +20,7 @@ export const PropertyItem = ({
                 <p className="card-text">{city}</p>
                 <p className="card-text">{objectType}</p>
                 <p className="card-text">{objectRelation}</p>
-                <Link to={`/catalog/${_id}`} className="btn btn-primary">Details</Link>
+                <Link to={`/property/details/${_id}`} className="btn btn-primary">Details</Link>
             </div>  
         </div>
 

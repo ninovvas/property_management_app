@@ -22,10 +22,26 @@ export const propertyServiceFactory = (token) => {
         return properties;
     };
 
+    const getPropertyById = async (propertyID) => {
+        const result = await request.get(`${url}/details/${propertyID}`);
+        console.log(result);
+    
+        return result;
+    }
+
+    const editProperty = async (propertyID, data) => {
+        const result = await request.put(`${url}/edit/${propertyID}`, data);
+        console.log(result);
+    
+        return result;
+    }
+
 
     return {
         createObject,
-        getAllProperties
+        getAllProperties,
+        getPropertyById,
+        editProperty
     };
 
 

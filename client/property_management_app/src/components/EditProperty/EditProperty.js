@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Header } from "../Header/Header";
+
+import { useParams } from "react-router-dom";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
-
-import { Address } from "./Address/Address";
-import { Object } from "./Object/Object";
-import { ObjectConfirm } from "./ObjectConfirm/ObjectConfirm";
+import { Header } from "../Header/Header";
+import { Address } from "../CreateObject/Address/Address";
+import { Object } from "../CreateObject/Object/Object";
 import { AuthContext } from "../../contexts/AutoContext";
+import { ObjectConfirm } from "../CreateObject/ObjectConfirm/ObjectConfirm";
 
 
-export const CreateObject = () => {
+export const EditProperty = ({propertyService}) => {
     const { userId } = useContext(AuthContext);
     const { propertyId } = useParams();
-    const propertyService = useService();
+    console.log(propertyId);
+
+
+    //const { userId } = useContext(AuthContext);
 
     const [step, setStep] = useState(1);
 
@@ -26,6 +30,27 @@ export const CreateObject = () => {
         userId
        
     });
+
+    useEffect(() => {
+        propertyService.getPropertyById(propertyId)
+            .then(result => {
+                const newResult = {
+                    street: result.state,
+                    streetNumber: String(result.streetNumber),
+                    country: result.country,
+                    state: result.state,
+                    city: result.city,
+                    objectRelation: result.objectRelation,
+                    objectType: result.objectType,
+                    userId: userId
+                }
+                console.log("###################");
+                console.log(newResult);
+                setFormData(newResult);
+                //state => ({...state, [e.target.name]: e.target.value})
+                //console.log(formData);
+            });
+    }, [propertyId]);
 
     const nextStep = () => {
         setStep(step + 1);
@@ -82,5 +107,10 @@ export const CreateObject = () => {
         </div>
       );
   }
+        
+       
+    
+
+   
 
 }
