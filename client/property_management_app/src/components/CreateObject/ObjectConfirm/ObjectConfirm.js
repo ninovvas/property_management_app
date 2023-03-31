@@ -7,7 +7,7 @@ import { AuthContext } from "../../../contexts/AutoContext";
 
 import * as propertyService from "../../../services/propertyService";
 
-export const ObjectConfirm = ({prevStep, values}) => {
+export const ObjectConfirm = ({prevStep, values, titleButton}) => {
     
     const { onCreatePropertySubmit } = useContext(AuthContext);
   
@@ -105,7 +105,7 @@ export const ObjectConfirm = ({prevStep, values}) => {
                                                     <form method="POST" onSubmit={submitFormData}>
                                                     
                                                         <button variant="primary" className="btn btn-primary" onClick={prevStep}>Back to Object</button>
-                                                        <button variant="primary" type="submit"  className="btn btn-success">Create Object</button>
+                                                        <button variant="primary" type="submit"  className="btn btn-success">{titleButton}</button>
                                                             
                                                         
                                                     </form>

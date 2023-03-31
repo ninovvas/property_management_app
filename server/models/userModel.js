@@ -56,6 +56,10 @@ const userSchema = new mongoose.Schema({
     properties: [{
         type: ObjectId,
         ref: "Property"
+    }],
+    tenants: [{
+        type: ObjectId,
+        ref: "Tenant"
     }]
     
 }, { timestamps: { createdAt: 'created_at' } });

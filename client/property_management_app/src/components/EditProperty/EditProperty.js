@@ -16,6 +16,7 @@ export const EditProperty = ({propertyService}) => {
 
 
     //const { userId } = useContext(AuthContext);
+    const titleButton = "Edit Property"
 
     const [step, setStep] = useState(1);
 
@@ -97,7 +98,7 @@ export const EditProperty = ({propertyService}) => {
         <>
             <NavigationMenu />
             <Header />
-            <ObjectConfirm prevStep={prevStep} values={formData} />
+            <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton}/>
         </>
       );
     // default case to show nothing
