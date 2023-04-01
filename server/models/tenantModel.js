@@ -3,11 +3,11 @@ const { ObjectId } = mongoose.Schema.Types;
 
 const tenantSchema = new mongoose.Schema({
 
-    first_name: {
+    firstName: {
         type: String,
         required: true
     },
-    last_name: {
+    lastName: {
         type: String,
         required: true
     },

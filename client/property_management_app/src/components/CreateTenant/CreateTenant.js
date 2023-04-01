@@ -1,9 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import validator from "validator";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AutoContext";
+import { useForm } from "../../hooks/useForm";
+import { Header } from "../Header/Header";
+import { NavigationMenu } from "../Navigation/NavigationMenu";
 
-export const CreateTenant = () => {
+export const CreateTenant = ({
+    tenantService
+}) => {
 
-    const {userId} = useContext(AuthContext);
-    const navigate = useNavigate();
+    const {userId, onTenantSubmit} = useContext(AuthContext);
+    //const navigate = useNavigate();
+
+    const buttonTenant="Create new Tenant"
+
 
     const { values, changeHandler, onSubmit } = useForm({
         firstName: '',
@@ -14,8 +25,11 @@ export const CreateTenant = () => {
         bic: '',
         address: '', 
         userId: userId
-    }, onRegisterSubmit);
-    
+    }, onTenantSubmit);
+
+   
+
+
     return(
         <>
         <NavigationMenu />
@@ -30,11 +44,12 @@ export const CreateTenant = () => {
                                 <div className="row align-items-center">
                                     <div className="col-md-12">
                                         <div className="page-header-title">
-                                            <h5 className="m-b-10">Create Tenant</h5>
+                                            <h5 className="m-b-10">Tenant</h5>
                                         </div>
                                         <ul className="breadcrumb">
                                             <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
-                                            <li className="breadcrumb-item"><Link to={"#"}>XXXXX</Link></li>
+                                            <li className="breadcrumb-item"><Link to={"/tenants"}>My Tenants</Link></li>
+                                            <li className="breadcrumb-item"><Link to={"#"}>Create Tenant</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -46,14 +61,129 @@ export const CreateTenant = () => {
                               
                                 <div className="row">
                                     <div className="col-sm-12">
+
                                         <div className="card">
                                             <div className="card-header">
-                                                <h5>Street: {property.street}</h5>
+                                                <h5>Create new tenant</h5>
                                             </div>
-                                            <div className="card-block">
-                                                <p>City: {property.city}</p>
-                                                <Link to={`/property/edit/${property._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link>
-                                                <Link to={`/property/delete/${property._id}`}><button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip">Delete</button></Link>
+                                            <div className="card-body">
+                                                
+                                                <div className="row">
+                                                    <div className="col-md-6">
+                                                        <form method="post" onSubmit={onSubmit}>
+
+                                                            <div className="form-group">
+                                                                <label for="firstName">First name</label>
+                                                                <input 
+                                                                type="text" 
+                                                                className="form-control" 
+                                                                id="firstName" 
+                                                                name="firstName" 
+                                                                placeholder="Enter your first name"
+                                                                value={values.firstName}
+                                                                onChange={changeHandler}
+                                                                />
+                                                                
+                                                            </div>
+
+                                                            <div className="form-group">
+                                                                <label for="lastName">First name</label>
+                                                                <input 
+                                                                type="text" 
+                                                                className="form-control" 
+                                                                id="lastName" 
+                                                                name="lastName" 
+                                                              
+                                                                placeholder="Enter your last name"
+                                                                value={values.lastName}
+                                                                onChange={changeHandler}
+                                                                />
+                                                                
+                                                            </div>
+                                                            
+                                                            <div className="form-group">
+                                                                <label for="exampleInputEmail1">Email address</label>
+                                                                <input 
+                                                                type="email" 
+                                                                className="form-control" 
+                                                                id="exampleInputEmail1" 
+                                                                name="email" 
+                                                               
+                                                                placeholder="Enter your email"
+                                                                value={values.email}
+                                                                onChange={changeHandler}
+                                                                />
+                                                                
+                                                            </div>
+
+                                                            <div className="form-group">
+                                                                <label for="phone">Phone number</label>
+                                                                <input 
+                                                                type="tel" 
+                                                                className="form-control" 
+                                                                id="phone" 
+                                                                name="phone" 
+                                                              
+                                                                placeholder="Enter your phone number"
+                                                                value={values.phone}
+                                                                onChange={changeHandler}
+                                                                />
+                                                                
+                                                            </div>
+
+                                                            <div className="form-group">
+                                                                <label for="address">Address</label>
+                                                                <input 
+                                                                type="text" 
+                                                                className="form-control" 
+                                                                id="address" 
+                                                                name="address" 
+                                                              
+                                                                placeholder="Enter your current address"
+                                                                value={values.address}
+                                                                onChange={changeHandler}
+                                                                />
+                                                                
+                                                            </div>
+                                                        
+
+                                                            <div className="form-group">
+                                                                <label for="iban">IBAN</label>
+                                                                <input 
+                                                                type="text" 
+                                                                className="form-control" 
+                                                                id="iban" 
+                                                                name="iban" 
+                                                              
+                                                                placeholder=" (Optional) Enter your IBAN"
+                                                                value={values.iban}
+                                                                onChange={changeHandler}
+                                                                />
+                                                                
+                                                            </div>
+
+                                                            <div className="form-group">
+                                                                <label for="bic">BIC/SWIFT</label>
+                                                                <input 
+                                                                type="text" 
+                                                                className="form-control" 
+                                                                id="bic" 
+                                                                name="bic" 
+                                                              
+                                                                placeholder=" (Optional) Enter your BIC/SWIFT"
+                                                                value={values.bic}
+                                                                onChange={changeHandler}
+                                                                />
+                                                                
+                                                            </div>
+
+                                                            
+                                                            <button type="submit" className="btn btn-primary">{buttonTenant}</button>
+                                                        </form>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
                                             </div>
                                             
                                         </div>

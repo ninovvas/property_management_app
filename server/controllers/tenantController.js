@@ -4,7 +4,7 @@ const  {tenantModel, userModel} = require("../models");
 
 
 function newTenant(firstName, lastName, email, phone, iban, bic, address, userId) {
-    return propertyModel.create({firstName, lastName, email, phone, iban, bic, address, userId })
+    return tenantModel.create({firstName, lastName, email, phone, iban, bic, address, userId })
         .then(tenant => {
             console.log(tenant);
             return Promise.all([

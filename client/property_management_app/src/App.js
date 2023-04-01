@@ -23,19 +23,22 @@ import { NavigationMenu } from './components/Navigation/NavigationMenu';
 import { RouteGuard } from './components/common/RouteGuard';
 import { PropertyDetails } from './components/PropertyDetails/PropertyDetails';
 import { EditProperty } from './components/EditProperty/EditProperty';
+import { CreateTenant } from './components/CreateTenant/CreateTenant';
+import { tenantServiceFactory } from './services/tenantService';
 
 function App() {
 
-  const [cookies] = useCookies();
+    const [cookies] = useCookies();
       //const isLogged = true;
       //const cookies = new Cookies();
      
       
-      const navigate = useNavigate();
+    const navigate = useNavigate();
       //const [auth, setAuth] = useState({});
       const [auth, setAuth] = useLocalStorage('accessToken', {});
       
-      const propertyService = propertyServiceFactory(auth.accessToken);
+    const propertyService = propertyServiceFactory(auth.accessToken);
+    const tenantService = tenantServiceFactory(auth.accessToken);
     const authService = authServiceFactory(auth.accessToken)
     
 
@@ -107,11 +110,21 @@ function App() {
   };
 
 
+  const onTenantSubmit = async (data) => {
+    const newTenant = await tenantService.createTenant(data);
+    //setProperties
+    //setProperties((state) => [{...state, newProperty}]);
+    navigate('/dashboard');
+    
+}
+
+
       const contextValues = {
         onLoginSubmit,
         onRegisterSubmit,
         onLogout,
         onCreatePropertySubmit,
+        onTenantSubmit,
         firstName: auth.first_name,
         lastName: auth.last_name,
         address: auth.address,
@@ -134,6 +147,7 @@ function App() {
                 <Route path='/logout' element={<Logout />}></Route>
                 <Route path='/property/' element={<Property propertyService={propertyService}/>}></Route>
                 <Route path='/create_property/' element={<CreateObject />}></Route>
+                <Route path='/create_tenant/' element={<CreateTenant tenantService={tenantService}/>}></Route>
                 <Route path='/property/details/:propertyId' element={<PropertyDetails propertyService={propertyService}/>} />
                 <Route path='/property/edit/:propertyId' element={<EditProperty propertyService={propertyService}/>} />
               </Route>
