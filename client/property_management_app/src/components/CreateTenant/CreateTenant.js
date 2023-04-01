@@ -6,9 +6,7 @@ import { useForm } from "../../hooks/useForm";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 
-export const CreateTenant = ({
-    tenantService
-}) => {
+export const CreateTenant = () => {
 
     const {userId, onTenantSubmit} = useContext(AuthContext);
     //const navigate = useNavigate();

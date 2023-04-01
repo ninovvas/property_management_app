@@ -14,13 +14,13 @@ export const tenantServiceFactory = (token) => {
         return result;
     };
 
-    // const getAllProperties = async () => {
-    //     const result = await request.get(url);
-    //     console.log(result);
-    //     const properties = Object.values(result);
+    const getAllTenants = async () => {
+        const result = await request.get(url);
+        console.log(result);
+        //const tenants = Object.values(result);
     
-    //     return properties;
-    // };
+        return result;
+    };
 
     // const getPropertyById = async (propertyID) => {
     //     const result = await request.get(`${url}/details/${propertyID}`);
@@ -39,9 +39,8 @@ export const tenantServiceFactory = (token) => {
 
     return {
         createTenant,
-        // getAllProperties,
-        // getPropertyById,
-        // editProperty
+        getAllTenants
+        
     };
 
 

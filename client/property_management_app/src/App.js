@@ -25,6 +25,7 @@ import { PropertyDetails } from './components/PropertyDetails/PropertyDetails';
 import { EditProperty } from './components/EditProperty/EditProperty';
 import { CreateTenant } from './components/CreateTenant/CreateTenant';
 import { tenantServiceFactory } from './services/tenantService';
+import { TenantList } from './components/Tenant/TenantList';
 
 function App() {
 
@@ -147,7 +148,8 @@ function App() {
                 <Route path='/logout' element={<Logout />}></Route>
                 <Route path='/property/' element={<Property propertyService={propertyService}/>}></Route>
                 <Route path='/create_property/' element={<CreateObject />}></Route>
-                <Route path='/create_tenant/' element={<CreateTenant tenantService={tenantService}/>}></Route>
+                <Route path='/create_tenant/' element={<CreateTenant />}></Route>
+                <Route path='/tenants/' element={<TenantList tenantService={tenantService}/>}></Route>
                 <Route path='/property/details/:propertyId' element={<PropertyDetails propertyService={propertyService}/>} />
                 <Route path='/property/edit/:propertyId' element={<EditProperty propertyService={propertyService}/>} />
               </Route>
