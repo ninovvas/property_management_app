@@ -26,6 +26,8 @@ import { EditProperty } from './components/EditProperty/EditProperty';
 import { CreateTenant } from './components/CreateTenant/CreateTenant';
 import { tenantServiceFactory } from './services/tenantService';
 import { TenantList } from './components/Tenant/TenantList';
+import { TenantDetails } from './components/TenantDetails/TenantDetails';
+import { EditTenant } from './components/EditTenant/EditTenant';
 
 function App() {
 
@@ -115,8 +117,17 @@ function App() {
     const newTenant = await tenantService.createTenant(data);
     //setProperties
     //setProperties((state) => [{...state, newProperty}]);
-    navigate('/dashboard');
+    navigate('/tenants');
     
+}
+
+const onTenantEditSubmit = async (values) => {
+  const result = await tenantService.editTenant(values._id, values);
+
+  //setGames(state => state.map(x => x._id === values._id ? result : x))
+  
+
+  navigate(`/tenant/details/${values._id}`);
 }
 
 
@@ -126,6 +137,7 @@ function App() {
         onLogout,
         onCreatePropertySubmit,
         onTenantSubmit,
+        onTenantEditSubmit,
         firstName: auth.first_name,
         lastName: auth.last_name,
         address: auth.address,
@@ -152,6 +164,8 @@ function App() {
                 <Route path='/tenants/' element={<TenantList tenantService={tenantService}/>}></Route>
                 <Route path='/property/details/:propertyId' element={<PropertyDetails propertyService={propertyService}/>} />
                 <Route path='/property/edit/:propertyId' element={<EditProperty propertyService={propertyService}/>} />
+                <Route path='/tenant/details/:tenantId' element={<TenantDetails tenantService={tenantService}/>} />
+                <Route path='/tenant/edit/:tenantId' element={<EditTenant tenantService={tenantService}/>} />
               </Route>
             </Routes>
           </>

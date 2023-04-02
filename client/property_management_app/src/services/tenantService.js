@@ -22,24 +22,26 @@ export const tenantServiceFactory = (token) => {
         return result;
     };
 
-    // const getPropertyById = async (propertyID) => {
-    //     const result = await request.get(`${url}/details/${propertyID}`);
-    //     console.log(result);
+    const getTenantById = async (tenantID) => {
+        const result = await request.get(`${url}/details/${tenantID}`);
+        console.log(result);
     
-    //     return result;
-    // }
+        return result;
+    }
 
-    // const editProperty = async (propertyID, data) => {
-    //     const result = await request.put(`${url}/edit/${propertyID}`, data);
-    //     console.log(result);
+    const editTenant = async (tenantID, data) => {
+        const result = await request.put(`${url}/edit/${tenantID}`, data);
+        console.log(result);
     
-    //     return result;
-    // }
+        return result;
+    }
 
 
     return {
         createTenant,
-        getAllTenants
+        getAllTenants,
+        getTenantById,
+        editTenant
         
     };
 

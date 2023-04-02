@@ -3,6 +3,7 @@ const users = require('./users');
 //const books = require('./books');
 const properties = require('./properties');
 const tenants = require('./tenants');
+const tenancies = require('./tenancies');
 
 const { authController } = require('../controllers');
 
@@ -13,6 +14,7 @@ router.post('/logout', authController.logout);
 router.use('/users', users);
 router.use('/property', properties);
 router.use('/tenant', tenants);
+router.use('/tenancy', tenancies);
 //router.use('/books', books);
 
 module.exports = router;
