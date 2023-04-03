@@ -64,18 +64,42 @@ function getProperty(req, res, next) {
         .catch(next);
 }
 
+
+function getPropertyByName(req, res, next){
+    const { _id: userId } = req.user;
+    const { propertyName } = req.params;
+   
+    const splitPropertyName = propertyName.split(" ");
+    const street = splitPropertyName[0];
+    const streetNumber = splitPropertyName[1];
+    const city = splitPropertyName[2];
+    const country = splitPropertyName[3];
+
+    console.log("First and Last name");
+    console.log(street);
+    console.log(streetNumber);
+    console.log(city);
+    console.log(country);
+
+     
+    const searchStreet = new RegExp(street, 'i');
+    const searchStreetNumber = new RegExp(streetNumber, '\d');
+    const searchCity = new RegExp(city, 'i');
+    const searchCountry = new RegExp(country, 'i');
+
+    propertyModel.find({userId}).and([{'street': {$regex: searchStreet}}, {'streetNumber': streetNumber}, {'city': {$regex: searchCity}},
+    {'country': {$regex: searchCountry}}]).lean()
+    .then(properties => {
+        res.status(200).json(properties)
+    })
+    .catch(next);
+}
+
+
+
+
 function editProperty(req, res, next){
-    // const { _id: bookId } = req.body;
-    // const { thumbnails } = req.body;
-    // const { _id: userId } = req.user;
-    // const { title } = req.body;
-    // const { isbn } = req.body;
-    // const { authors } = req.body;
-    // const { published } = req.body;
-    // const { subtitle } = req.body;
-    // const { rating } = req.body;
-    // const { description } = req.body;
-    // const { read } = req.body;
+ 
 
     const { _id: propertyId } = req.body;
     const { street } = req.body;
@@ -107,5 +131,6 @@ module.exports = {
     createProperty,
     getAllProperties,
     getProperty,
-    editProperty
+    editProperty,
+    getPropertyByName
 }

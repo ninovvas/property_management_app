@@ -29,6 +29,14 @@ export const tenantServiceFactory = (token) => {
         return result;
     }
 
+    const getTenantByName = async (tenantName) => {
+        console.log(tenantName);
+        const result = await request.get(`${url}/info/${tenantName}`);
+        console.log(result);
+    
+        return result;
+    }
+
     const editTenant = async (tenantID, data) => {
         const result = await request.put(`${url}/edit/${tenantID}`, data);
         console.log(result);
@@ -41,7 +49,8 @@ export const tenantServiceFactory = (token) => {
         createTenant,
         getAllTenants,
         getTenantById,
-        editTenant
+        editTenant,
+        getTenantByName
         
     };
 

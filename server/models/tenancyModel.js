@@ -4,7 +4,7 @@ const { ObjectId } = mongoose.Schema.Types;
 const tenancySchema = new mongoose.Schema({
 
     contractNumber: {
-        type: Number,
+        type: String,
         required: true
     },
     securityGuaranty: {

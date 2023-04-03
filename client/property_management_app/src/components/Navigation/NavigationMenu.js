@@ -38,10 +38,16 @@ export const NavigationMenu = () => {
                             <Link to={"/create_tenant"} className="nav-link "><span className="pcoded-micon"><i className="fas fa-plus-circle"></i></span><span className="pcoded-mtext">Create Tenant</span></Link>
                         </li>
                         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" className="nav-item">
-                            <Link to={"/tenants"} className="nav-link "><span className="pcoded-micon"><i className="fas fa-plus-circle"></i></span><span className="pcoded-mtext">My Tenants</span></Link>
+                            <Link to={"/tenants"} className="nav-link "><span className="pcoded-micon"><i className="fas fa-list"></i></span><span className="pcoded-mtext">My Tenants</span></Link>
                         </li>
                         <li className="nav-item pcoded-menu-caption">
                             <label>Tenancy</label>
+                        </li>
+                        <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" className="nav-item">
+                            <Link to={"/create_tenancy"} className="nav-link "><span className="pcoded-micon"><i className="fas fa-plus-circle"></i></span><span className="pcoded-mtext">Create Tenancy</span></Link>
+                        </li>
+                        <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" className="nav-item">
+                            <Link to={"/tenancy"} className="nav-link "><span className="pcoded-micon"><i className="fas fa-list"></i></span><span className="pcoded-mtext">My Tenancies</span></Link>
                         </li>
                     </ul>
 

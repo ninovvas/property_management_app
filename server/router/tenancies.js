@@ -3,7 +3,7 @@ const router = express.Router();
 const { auth } = require('../utils');
 const { tenancyController } = require('../controllers');
 
-// router.get('/',  auth(), tenantController.getAllTenants);
+router.get('/',  auth(), tenancyController.getAllTenancies);
 router.post('/', auth(), tenancyController.createTenancy);
 
 // router.put('/edit/:tenantId', auth(), tenantController.editTenant);

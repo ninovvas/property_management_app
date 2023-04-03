@@ -1,9 +1,10 @@
 const  {tenancyModel,tenantModel,propertyModel, userModel} = require("../models");
+const { getAllTenants } = require("./tenantController");
 
 
 
-function newTenancy(securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId) {
-    return tenancyModel.create({securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId})
+function newTenancy(contractNumber, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId) {
+    return tenancyModel.create({contractNumber, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId})
         .then(tenancy => {
             console.log(tenancy);
             return Promise.all([
@@ -17,21 +18,22 @@ function newTenancy(securityGuaranty, startTenancy, endTenancy, comment, userId,
 }
 
 
-// function getAllTenants(req, res, next) {
-//     const { _id: userId } = req.user;
-//     //const { userId } = req.user;
-//     console.log(userId);
-//     tenantModel.find({userId})
-//         .sort({ created_at: -1 })
-//         //.populate('thumbnailId userId')
-//         .then(tenants => {
-//             res.status(200).json(tenants)
-//         })
-//         .catch(next);
-// }
+function getAllTenancies(req, res, next) {
+    const { _id: userId } = req.user;
+    //const { userId } = req.user;
+    console.log(userId);
+    tenancyModel.find({userId})
+        .sort({ created_at: -1 })
+        //.populate('thumbnailId userId')
+        .then(tenancies => {
+            res.status(200).json(tenancies)
+        })
+        .catch(next);
+}
 
 
 function createTenancy(req, res, next) {
+    const { contractNumber } = req.body;
     const { securityGuaranty } = req.body;
     const { startTenancy } = req.body;
     const { endTenancy } = req.body;
@@ -44,7 +46,7 @@ function createTenancy(req, res, next) {
     console.log("-----------createTenancy------------")
     console.log(req.body);
 
-    newTenancy(securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId)
+    newTenancy(contractNumber, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId)
         .then((updatedTenancy) => {
             console.log(updatedTenancy);
             res.status(200).json(updatedTenancy);
@@ -55,19 +57,19 @@ function createTenancy(req, res, next) {
 }
 
 
-// function getTenant(req, res, next) {
-//     //console.log(req.params);
-//     const { tenantId } = req.params;
+function getTenancy(req, res, next) {
+    //console.log(req.params);
+    const { tenancyId } = req.params;
 
-//     console.log(tenantId);
+    console.log(tenancyId);
 
-//     tenantModel.findById(tenantId)
-//         .populate({
-//             path : 'userId'
-//           })
-//         .then(tenant => res.json(tenant))
-//         .catch(next);
-// }
+    tenancyModel.findById(tenancyId)
+        .populate({
+            path : 'userId'
+          })
+        .then(tenancy => res.json(tenancy))
+        .catch(next);
+}
 
 
 
@@ -101,5 +103,7 @@ function createTenancy(req, res, next) {
 
 
 module.exports = {
-    createTenancy
+    createTenancy,
+    getTenancy,
+    getAllTenancies
 }

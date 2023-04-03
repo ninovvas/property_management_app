@@ -53,6 +53,30 @@ function createTenant(req, res, next) {
         
 }
 
+function getTenantByName(req, res, next){
+    const { _id: userId } = req.user;
+    const { tenantName } = req.params;
+    //const { lastName } = req.params;
+
+    const firstAndLastName = tenantName.split(" ");
+    const firstName = firstAndLastName[0];
+    const lastName = firstAndLastName[1];
+
+    console.log("First and Last name");
+    console.log(firstName);
+    console.log(lastName);
+
+     
+    const searchFirstName = new RegExp(firstName, 'i');
+    const searchLastName = new RegExp(lastName, 'i');
+
+    tenantModel.find({userId}).and([{'firstName': {$regex: searchFirstName}}, {'lastName': {$regex: searchLastName}}]).lean()
+    .then(tenants => {
+        res.status(200).json(tenants)
+    })
+    .catch(next);
+}
+
 
 function getTenant(req, res, next) {
     //console.log(req.params);
@@ -103,5 +127,6 @@ module.exports = {
     createTenant,
     getAllTenants,
     editTenant,
-    getTenant
+    getTenant,
+    getTenantByName
 }
