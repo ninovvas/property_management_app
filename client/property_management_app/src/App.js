@@ -31,6 +31,7 @@ import { EditTenant } from './components/EditTenant/EditTenant';
 import { CreateTenancy } from './components/CreateTenancy/CreateTenancy';
 import { tenancyServiceFactory } from './services/tenancyService';
 import { TenancyList } from './components/Tenancy/TenancyList';
+import { TenancyDetails } from './components/TenancyDetails/TenancyDetails';
 
 function App() {
 
@@ -197,6 +198,7 @@ const onTenantEditSubmit = async (values) => {
                 <Route path='/property/edit/:propertyId' element={<EditProperty propertyService={propertyService}/>} />
                 <Route path='/tenant/details/:tenantId' element={<TenantDetails tenantService={tenantService}/>} />
                 <Route path='/tenant/edit/:tenantId' element={<EditTenant tenantService={tenantService}/>} />
+                <Route path='/tenancy/details/:tenancyId' element={<TenancyDetails tenancyService={tenancyService}/>} />
               </Route>
             </Routes>
           </>

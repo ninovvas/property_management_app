@@ -8,7 +8,7 @@ router.post('/', auth(), tenancyController.createTenancy);
 
 // router.put('/edit/:tenantId', auth(), tenantController.editTenant);
 
-// router.get('/details/:tenantId', auth(), tenantController.getTenant);
+router.get('/details/:tenancyId', auth(), tenancyController.getTenancy);
 
 
 module.exports = router

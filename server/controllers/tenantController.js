@@ -8,7 +8,7 @@ function newTenant(firstName, lastName, email, phone, iban, bic, address, userId
         .then(tenant => {
             console.log(tenant);
             return Promise.all([
-                tenantModel.updateOne({ _id: userId }, { $push: { tenants: tenant._id } }),
+                userModel.updateOne({ _id: userId }, { $push: { tenants: tenant._id } }),
                 //thumbnailModel.findByIdAndUpdate({ _id: thumbnailId },{ $push: { thumbnailId: thumbnailId}}, { new: true }),
 
             ])
@@ -62,9 +62,9 @@ function getTenantByName(req, res, next){
     const firstName = firstAndLastName[0];
     const lastName = firstAndLastName[1];
 
-    console.log("First and Last name");
-    console.log(firstName);
-    console.log(lastName);
+    // console.log("First and Last name");
+    // console.log(firstName);
+    // console.log(lastName);
 
      
     const searchFirstName = new RegExp(firstName, 'i');

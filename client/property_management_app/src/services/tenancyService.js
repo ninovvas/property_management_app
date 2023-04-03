@@ -22,12 +22,12 @@ export const tenancyServiceFactory = (token) => {
         return result;
     };
 
-    // const getTenantById = async (tenantID) => {
-    //     const result = await request.get(`${url}/details/${tenantID}`);
-    //     console.log(result);
+    const getTenancyById = async (tenancyId) => {
+        const result = await request.get(`${url}/details/${tenancyId}`);
+        console.log(result);
     
-    //     return result;
-    // }
+        return result;
+    }
 
     // const getTenantByName = async (tenantName) => {
     //     console.log(tenantName);
@@ -47,7 +47,8 @@ export const tenancyServiceFactory = (token) => {
 
     return {
         createTenancy,
-        getAllTenancies
+        getAllTenancies,
+        getTenancyById
         
         
     };

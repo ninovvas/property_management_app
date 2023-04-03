@@ -8,9 +8,11 @@ function newTenancy(contractNumber, securityGuaranty, startTenancy, endTenancy, 
         .then(tenancy => {
             console.log(tenancy);
             return Promise.all([
-                tenancyModel.updateOne({ _id: userId }, { $push: { tenancies: tenancy._id } }),
-                tenancyModel.updateOne({ _id: tenantId }, { $push: { tenancies: tenantId } }),
-                tenancyModel.updateOne({ _id: propertyId }, { $push: { tenancies: propertyId } }),
+                userModel.updateOne({ _id: userId }, { $push: { tenancies: tenancy._id } }),
+                //tenancyModel.updateOne({ _id: tenantId }, { $push: { tenancies: tenantId } }),
+                tenantModel.findByIdAndUpdate({ _id: tenantId },{ $push: { tenancies: tenancy._id }}, { new: true }),
+                propertyModel.findByIdAndUpdate({ _id: propertyId },{ $push: { tenancies: tenancy._id }}, { new: true }),
+                //tenancyModel.updateOne({ _id: propertyId }, { $push: { tenancies: propertyId } }),
                 //thumbnailModel.findByIdAndUpdate({ _id: thumbnailId },{ $push: { thumbnailId: thumbnailId}}, { new: true }),
 
             ])
@@ -65,7 +67,13 @@ function getTenancy(req, res, next) {
 
     tenancyModel.findById(tenancyId)
         .populate({
-            path : 'userId'
+            path : 'userId',
+          })
+          .populate({
+            path : 'tenantId',
+          })
+          .populate({
+            path : 'propertyId'
           })
         .then(tenancy => res.json(tenancy))
         .catch(next);
