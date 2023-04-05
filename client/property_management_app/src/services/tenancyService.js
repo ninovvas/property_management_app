@@ -29,6 +29,13 @@ export const tenancyServiceFactory = (token) => {
         return result;
     }
 
+    const deleteTenancy = async (tenancyId, propertyId, tenantId) => {
+        const result = await request.delete(`${url}/delete/${tenancyId}/${propertyId}/${tenantId}`);
+        console.log(result);
+    
+        return result;
+    }
+
     // const getTenantByName = async (tenantName) => {
     //     console.log(tenantName);
     //     const result = await request.get(`${url}/info/${tenantName}`);
@@ -37,18 +44,22 @@ export const tenancyServiceFactory = (token) => {
     //     return result;
     // }
 
-    // const editTenant = async (tenantID, data) => {
-    //     const result = await request.put(`${url}/edit/${tenantID}`, data);
-    //     console.log(result);
+    const editTenancy = async (tenancyID, data) => {
+        console.log("editTenancy");
+        console.log(data);
+        const result = await request.put(`${url}/edit/${tenancyID}`, data);
+        console.log(result);
     
-    //     return result;
-    // }
+        return result;
+    }
 
 
     return {
         createTenancy,
         getAllTenancies,
-        getTenancyById
+        getTenancyById,
+        editTenancy,
+        deleteTenancy
         
         
     };

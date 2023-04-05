@@ -58,7 +58,7 @@ function getTenantByName(req, res, next){
     const { tenantName } = req.params;
     //const { lastName } = req.params;
 
-    const firstAndLastName = tenantName.split(" ");
+    const firstAndLastName = tenantName.split(", ");
     const firstName = firstAndLastName[0];
     const lastName = firstAndLastName[1];
 

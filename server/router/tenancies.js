@@ -6,9 +6,10 @@ const { tenancyController } = require('../controllers');
 router.get('/',  auth(), tenancyController.getAllTenancies);
 router.post('/', auth(), tenancyController.createTenancy);
 
-// router.put('/edit/:tenantId', auth(), tenantController.editTenant);
+router.put('/edit/:tenancyId', auth(), tenancyController.editTenancy);
 
 router.get('/details/:tenancyId', auth(), tenancyController.getTenancy);
+router.delete('/delete/:tenancyId/:propertyId/:tenantId', auth(), tenancyController.deleteTenancy);
 
 
 module.exports = router

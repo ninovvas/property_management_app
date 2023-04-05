@@ -16,7 +16,8 @@ export const EditProperty = ({propertyService}) => {
 
 
     //const { userId } = useContext(AuthContext);
-    const titleButton = "Edit Property"
+    const titleButton = "Edit Property";
+    const action = "edit";
 
     const [step, setStep] = useState(1);
 
@@ -36,7 +37,8 @@ export const EditProperty = ({propertyService}) => {
         propertyService.getPropertyById(propertyId)
             .then(result => {
                 const newResult = {
-                    street: result.state,
+                    _id: result._id,
+                    street: result.street,
                     streetNumber: String(result.streetNumber),
                     country: result.country,
                     state: result.state,
@@ -98,7 +100,7 @@ export const EditProperty = ({propertyService}) => {
         <>
             <NavigationMenu />
             <Header />
-            <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton}/>
+            <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton} action={action}/>
         </>
       );
     // default case to show nothing

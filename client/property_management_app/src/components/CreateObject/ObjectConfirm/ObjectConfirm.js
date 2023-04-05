@@ -7,9 +7,9 @@ import { AuthContext } from "../../../contexts/AutoContext";
 
 import * as propertyService from "../../../services/propertyService";
 
-export const ObjectConfirm = ({prevStep, values, titleButton}) => {
+export const ObjectConfirm = ({prevStep, values, titleButton, action}) => {
     
-    const { onCreatePropertySubmit } = useContext(AuthContext);
+    const { onCreatePropertySubmit, onEditPropertySubmit } = useContext(AuthContext);
   
 
 
@@ -25,8 +25,15 @@ export const ObjectConfirm = ({prevStep, values, titleButton}) => {
         // })
         console.log("values");
         console.log(values);
+        if (action === "create") {
+            onCreatePropertySubmit(values);
+        }
 
-        onCreatePropertySubmit(values);
+        if (action === "edit") {
+            onEditPropertySubmit(values);
+        }
+
+       
 
     
     

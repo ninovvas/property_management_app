@@ -11,6 +11,8 @@ export const TenancyDetails = ({tenancyService}) => {
     const navigate = useNavigate();
     const [tenancy, setTenancy] = useState({});
 
+    console.log(tenancyId);
+
     useEffect(() => {
         tenancyService.getTenancyById(tenancyId)
        .then(result => {
@@ -21,6 +23,18 @@ export const TenancyDetails = ({tenancyService}) => {
     //const isOwner = property.userId === userId;
     console.log("Tenancy Details");
     console.log(tenancy);
+
+
+    
+    const onDeleteClick = async () => {
+        await tenancyService.deleteTenancy(tenancy._id, tenancy.propertyId._id, tenancy.tenantId._id);
+
+        setTenancy({});
+        // TODO: delete from state
+
+        navigate('/tenancy');
+    };
+   
 
     return(
     <>
@@ -57,12 +71,14 @@ export const TenancyDetails = ({tenancyService}) => {
                                             <h5>Contract number: {tenancy.contractNumber}</h5>
                                         </div>
                                         <div className="card-block">
+                                      
                                             <p>Security Guaranty: {tenancy.securityGuaranty}</p>
                                             <p>Start Tenancy: {tenancy.startTenancy}</p>
                                             <p>End Tenancy: {tenancy.startTenancy}</p>
                                             <p>Comment: {tenancy.comment}</p>
+                                            
                                             <Link to={`/tenancy/edit/${tenancy._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link>
-                                            <Link to={`/tenancy/delete/${tenancy._id}`}><button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip">Delete</button></Link>
+                                            <button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip" onClick={onDeleteClick}>Delete</button>
                                         </div>
                                         
                                     </div>

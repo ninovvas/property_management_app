@@ -11,7 +11,8 @@ import { AuthContext } from "../../contexts/AutoContext";
 export const CreateObject = () => {
     const { userId } = useContext(AuthContext);
 
-    const titleButton= "Create Property"
+    const titleButton= "Create Property";
+    const action = "create";
 
     const [step, setStep] = useState(1);
 
@@ -72,7 +73,7 @@ export const CreateObject = () => {
         <>
             <NavigationMenu />
             <Header />
-            <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton}/>
+            <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton} action={action}/>
         </>
       );
     // default case to show nothing

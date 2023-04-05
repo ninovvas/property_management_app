@@ -69,13 +69,13 @@ function getPropertyByName(req, res, next){
     const { _id: userId } = req.user;
     const { propertyName } = req.params;
    
-    const splitPropertyName = propertyName.split(" ");
+    const splitPropertyName = propertyName.split(", ");
     const street = splitPropertyName[0];
     const streetNumber = splitPropertyName[1];
     const city = splitPropertyName[2];
     const country = splitPropertyName[3];
 
-    console.log("First and Last name");
+    console.log("getPropertyByName");
     console.log(street);
     console.log(streetNumber);
     console.log(city);

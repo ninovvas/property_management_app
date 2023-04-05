@@ -32,6 +32,7 @@ import { CreateTenancy } from './components/CreateTenancy/CreateTenancy';
 import { tenancyServiceFactory } from './services/tenancyService';
 import { TenancyList } from './components/Tenancy/TenancyList';
 import { TenancyDetails } from './components/TenancyDetails/TenancyDetails';
+import { EditTenancy } from './components/EditTenancy/EditTenancy';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
     const navigate = useNavigate();
       //const [auth, setAuth] = useState({});
       const [auth, setAuth] = useLocalStorage('accessToken', {});
+      const [tenancy, setTenancy] = useState({});
       
     const propertyService = propertyServiceFactory(auth.accessToken);
     const tenantService = tenantServiceFactory(auth.accessToken);
@@ -114,8 +116,20 @@ function App() {
       //setProperties
       //setProperties((state) => [{...state, newProperty}]);
 
-      navigate('/dashboard');
+      navigate('/property');
   };
+
+  const onEditPropertySubmit = async (data) => {
+    console.log("propertyId")
+  
+    const editProperty = await propertyService.editProperty(data._id, data);
+    console.log("editProperty")
+    console.log(editProperty)
+    //setProperties
+    //setProperties((state) => [{...state, newProperty}]);
+
+    navigate(`/property/details/${data._id}`);
+};
 
 
   const onTenantSubmit = async (data) => {
@@ -125,6 +139,7 @@ function App() {
     navigate('/tenants');
     
 }
+
 
 const onTenancySubmit = async (data) => {
   const newData = {
@@ -146,8 +161,28 @@ const onTenancySubmit = async (data) => {
   
 }
 
+const onTenancyEditSubmit = async (data) => {
+  const newData = {
+    _id: data._id,
+    contractNumber: data.contractNumber,
+    securityGuaranty: data.securityGuaranty,
+    startTenancy: data.startTenancy,
+    endTenancy: data.endTenancy,
+    comment: data.comment,
+    userId: data.userId,
+    tenantId: data.tenantId,
+    propertyId: data.propertyId
 
-
+  }
+  console.log("onTenancyEditSubmit");
+  console.log(data);
+  const newTenancy = await tenancyService.editTenancy(data._id, newData);
+  //setProperties
+  //setProperties((state) => [{...state, newProperty}]);
+  //setTenancy(state => state.map(x => x._id === data._id ? data : x))
+  navigate(`/tenancy/details/${data._id}`);
+  
+}
 
 
 const onTenantEditSubmit = async (values) => {
@@ -165,9 +200,11 @@ const onTenantEditSubmit = async (values) => {
         onRegisterSubmit,
         onLogout,
         onCreatePropertySubmit,
+        onEditPropertySubmit,
         onTenantSubmit,
         onTenantEditSubmit,
         onTenancySubmit,
+        onTenancyEditSubmit,
         firstName: auth.first_name,
         lastName: auth.last_name,
         address: auth.address,
@@ -199,6 +236,7 @@ const onTenantEditSubmit = async (values) => {
                 <Route path='/tenant/details/:tenantId' element={<TenantDetails tenantService={tenantService}/>} />
                 <Route path='/tenant/edit/:tenantId' element={<EditTenant tenantService={tenantService}/>} />
                 <Route path='/tenancy/details/:tenancyId' element={<TenancyDetails tenancyService={tenancyService}/>} />
+                <Route path='/tenancy/edit/:tenancyId' element={<EditTenancy tenancyService={tenancyService} tenantService={tenantService} propertyService={propertyService}/>} />
               </Route>
             </Routes>
           </>

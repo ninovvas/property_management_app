@@ -81,37 +81,82 @@ function getTenancy(req, res, next) {
 
 
 
-// function editTenant(req, res, next){
-//     const { _id: tenantId } = req.body;
-//     const { firstName } = req.body;
-//     const { lastName } = req.body;
-//     const { email } = req.body;
-//     const { phone } = req.body;
-//     const { iban } = req.body;
-//     const { bic } = req.body;
-//     const { address } = req.body;
-//     const { _id: userId } = req.user;
+function editTenancy(req, res, next){
+    const { _id: tenancyId } = req.body;
+    const { contractNumber } = req.body;
+    const { securityGuaranty } = req.body;
+    const { startTenancy } = req.body;
+    const { endTenancy } = req.body;
+    const { comment } = req.body;
+    const { tenantId } = req.body;
+    const { propertyId } = req.body;
+    const { _id: userId } = req.user;
 
 
-//     console.log("Edit Tenant")
+
+    console.log("Edit Tenancy")
+    console.log(tenancyId);
+    console.log(contractNumber);
+    console.log(securityGuaranty);
+    console.log(startTenancy);
+    console.log(endTenancy);
+    console.log(comment);
+    console.log(tenantId);
+    console.log(propertyId);
+    console.log(userId);
+
+    const tenantIdNew = tenantId._id;
+    const propertyIdNew = propertyId._id
+
+    tenancyModel.findOneAndUpdate({ _id: tenancyId, userId }, {contractNumber, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId}, { new: true })
+    .then(updatedTenancy => {
+        if (updatedTenancy) {
+            res.status(200).json(updatedTenancy);
+        }
+        else {
+            res.status(401).json({ message: `Not allowed! to edit the page` });
+        }
+    })
+    .catch(next);
+
+}
 
 
-//     tenantModel.findOneAndUpdate({ _id: tenantId, userId }, {firstName, lastName, email, phone, iban, bic, address}, { new: true })
-//     .then(updatedTenant => {
-//         if (updatedTenant) {
-//             res.status(200).json(updatedTenant);
-//         }
-//         else {
-//             res.status(401).json({ message: `Not allowed! to edit the page` });
-//         }
-//     })
-//     .catch(next);
+function deleteTenancy(req, res, next) {
+    const { tenancyId } = req.params;
+    const { tenantId } = req.params;
+    const { propertyId } = req.params;
+    const { _id: userId } = req.user;
 
-// }
+    console.log('userId ' + userId)
+    console.log('tenancyId ' + tenancyId)
+    console.log(req.params);
+ 
+
+
+    Promise.all([
+        tenancyModel.findOneAndDelete({ _id: tenancyId, userId }),
+        userModel.findOneAndUpdate({ _id: userId }, { $pull: { tenancies: tenancyId } }),
+        tenantModel.findOneAndUpdate({ _id: tenantId }, { $pull: { tenancies: tenancyId } }),
+        propertyModel.findOneAndUpdate({ _id: propertyId }, { $pull: { tenancies: tenancyId } }),
+
+    ])
+        .then(([deletedOne, _, __]) => {
+            if (deletedOne) {
+                res.status(200).json(deletedOne)
+            } else {
+                res.status(401).json({ message: `Not allowed! to edit the page` });
+            }
+        })
+        .catch(next);
+}
+
 
 
 module.exports = {
     createTenancy,
     getTenancy,
-    getAllTenancies
+    getAllTenancies,
+    editTenancy,
+    deleteTenancy
 }

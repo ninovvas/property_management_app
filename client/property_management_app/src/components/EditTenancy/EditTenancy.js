@@ -1,25 +1,44 @@
 import { useContext, useEffect, useState } from "react";
 import validator from "validator";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AutoContext";
 import { useForm } from "../../hooks/useForm";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 
-export const CreateTenancy = ({
+export const EditTenancy = ({
     tenantService,
-    propertyService
+    propertyService,
+    tenancyService
 
 }) => {
 
-    const {userId, onTenancySubmit} = useContext(AuthContext);
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+    
+        return [year, month, day].join('-');
+    }
+
+    const {userId, onTenancyEditSubmit} = useContext(AuthContext);
+    const { tenancyId } = useParams();
     //const navigate = useNavigate();
 
-    const buttonTitle="Create new Tenancy"
+    const buttonTitle="Edit Tenancy"
 
-    
+    const [tenants, setTenants] = useState([]);
+    const [properties, setProperties] = useState([]);
 
-    const { values, changeHandler, onSubmit } = useForm({
+    const { values, changeHandler, onSubmit, changeValues } = useForm({
+        _id: tenancyId,
         contractNumber: String(Math.random()).substring(2,11),
         securityGuaranty: 0,
         startTenancy: new Date(),
@@ -30,44 +49,52 @@ export const CreateTenancy = ({
         propertyId: "",
         tenantName: "",
         propertyName: "",
-    }, onTenancySubmit);
-
-
-    const [tenants, setTenants] = useState([]);
-    const [properties, setProperties] = useState([]);
-   
-    // const handleChangeTenant = (event) => {
-    //     const value = event.target.value;
-    //     values.tenantId = idTenancies.tenantId;
-        
-    //   };
-
-    console.log(values);
+    }, onTenancyEditSubmit);
 
     useEffect(() => {
-        tenantService.getAllTenants()
+        tenancyService.getTenancyById(tenancyId)
             .then(result => {
-                setTenants(result)
+                changeValues(result);
+                //state => ({...state, [e.target.name]: e.target.value})
+                //console.log(formData);
             });
-        propertyService.getAllProperties()
-        .then(result => {
-            setProperties(result)
-        });
-        tenantService.getTenantByName(values.tenantName)
-            .then(result => {
-                console.log("getTenantByName");
-                console.log(result[0]._id);
-                values.tenantId = result[0]._id;
-            });
-        propertyService.getPropertyByName(values.propertyName)
-        .then(result => {
-            console.log("propertyName");
-            console.log(result);
-            values.propertyId = result[0]._id;
-        });
-        }, [values.tenantName, values.propertyName]);
+        // tenantService.getAllTenants()
+        // .then(result => {
+        //     setTenants(result)
+        // });
+        // propertyService.getAllProperties()
+        // .then(result => {
+        //     setProperties(result)
+        // });
+        // tenantService.getTenantByName(values.tenantName)
+        //     .then(result => {
+        //         console.log("getTenantByName");
+        //         console.log(result._id);
+        //         values.tenantId = result._id;
+        //     });
+        // propertyService.getPropertyByName(values.propertyName)
+        // .then(result => {
+        //     console.log("propertyName");
+        //     console.log(result);
+        //     values.propertyId = result._id;
+        // });
+    }, [tenancyId]);
 
 
+
+   
+
+    console.log("EditTenancy");
+    console.log(values);
+    console.log(typeof(values.startTenancy)); 
+    console.log(formatDate(values.startTenancy));
+    console.log("values.tenantName", values.tenantName);
+    console.log("values.propertyName", values.propertyName);
+    //console.log(typeof(values.startTenancy));
+    //console.log(values.startTenancy);
+   
+
+   
     return(
         <>
         <NavigationMenu />
@@ -87,7 +114,7 @@ export const CreateTenancy = ({
                                         <ul className="breadcrumb">
                                             <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
                                             <li className="breadcrumb-item"><Link to={"/tenancies"}>My Tenancies</Link></li>
-                                            <li className="breadcrumb-item"><Link to={"#"}>Create Tenancy</Link></li>
+                                            <li className="breadcrumb-item"><Link to={"#"}>Edit Tenancy</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -109,47 +136,42 @@ export const CreateTenancy = ({
                                                 <div className="row">
                                                     <div className="col-md-6">
                                                     <form method="post" onSubmit={onSubmit}>
-                                                            <label forHtml="tenantId">Tenants</label>
-                                                            <select 
+
+
+                                                            <div className="form-group">
+                                                                <label forHtml="tenantName">Tenant</label>
+                                                                <input 
+                                                                type="text" 
                                                                 className="form-control" 
                                                                 id="tenantName" 
-                                                                name="tenantName"
-                                                                value={values.tenantName}
+                                                                name="tenantName" 
+                                                                placeholder="Tenant"
+                                                                value={values.tenantName = `${values.tenantId.firstName}, ${values.tenantId.lastName}`}
                                                                 onChange={changeHandler}
+                                                                disabled
+                                                                />
+                                                                
+                                                            </div>
 
-                                                                >
-                                                                    <option value="ChooseTenant" key="chooseTenant">--Choose Tenant--</option>
-                                                                    {tenants.map((value, key) => {
-                                                                        return (
-                                                                            
-                                                                        <option value={value.name} key={value._id}>
-                                                                            {value.firstName}, {value.lastName}
-                                                                        </option>
-                                                                        );
-                                                                    })}
-                                                            </select>
-
-                                                            <label forHtml="country">Properties</label>
-                                                            <select 
+                                                            
+                                                            <div className="form-group">
+                                                                <label forHtml="propertyName">Property</label>
+                                                                <input 
+                                                                type="text" 
                                                                 className="form-control" 
                                                                 id="propertyName" 
-                                                                name="propertyName"
-                                                                value={values.propertyName}
+                                                                name="propertyName" 
+                                                                placeholder="Tenant"
+                                                                    value={values.propertyName = `${values.propertyId.street}, ${values.propertyId.streetNumber}, ${values.propertyId.city},  ${values.propertyId.country}`}
                                                                 onChange={changeHandler}
+                                                                disabled
+                                                                />
+                                                                
+                                                            </div>
 
-                                                                >
-                                                                    <option value="ChooseProperty" key="chooseProperty">--Choose Property--</option>
-                                                                    {properties.map((value, key) => {
-                                                                        return (
-                                                                            
-                                                                        <option value={value.name} key={value._id}>
-                                                                            {value.street}, {value.streetNumber}, {value.city}, {value.country}
-                                                                        </option>
-                                                                        );
-                                                                    })}
-                                                            </select>
-                                                       
-
+                                                           
+                                                           
+                                                            
                                                             <div className="form-group">
                                                                 <label forHtml="securityGuaranty">Security Guaranty</label>
                                                                 <input 
@@ -172,7 +194,7 @@ export const CreateTenancy = ({
                                                                 id="startTenancy" 
                                                                 name="startTenancy" 
                                                                 placeholder="Enter start Tenancy"
-                                                                value={new Date(values.startTenancy).toISOString().slice(0, 10)}
+                                                                value={formatDate(values.startTenancy)}
                                                                 onChange={changeHandler}
                                                                 />
                                                                 
@@ -186,7 +208,7 @@ export const CreateTenancy = ({
                                                                 id="endTenancy" 
                                                                 name="endTenancy" 
                                                                 placeholder="Enter End Tenancy"
-                                                                value={new Date(values.endTenancy).toISOString().slice(0, 10)}
+                                                                value={formatDate(values.endTenancy)}
                                                                 onChange={changeHandler}
                                                                 />
                                                                 
