@@ -20,6 +20,18 @@ export const TenantDetails = ({tenantService}) => {
 
     //const isOwner = property.userId === userId;
 
+    const onDeleteClick = async () => {
+        await tenantService.deleteTenant(tenantId);
+
+        setTenant({});
+        // TODO: delete from state
+
+        navigate('/tenants');
+    };
+
+    console.log(tenant);
+   
+
     return(
     <>
     <NavigationMenu />
@@ -60,8 +72,9 @@ export const TenantDetails = ({tenantService}) => {
                                             <p>Phone number: {tenant.phone}</p>
                                             <p>IBAN: {tenant.iban}</p>
                                             <p>BIC/SWIFT: {tenant.bic}</p>
-                                            <Link to={`/tenant/edit/${tenant._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link>
-                                            <Link to={`/tenant/delete/${tenant._id}`}><button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip">Delete</button></Link>
+                                            <Link to={`/tenant/edit/${tenant._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link> 
+                                            {tenant.tenancies && tenant.tenancies.length === 0 ? ( <button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip" onClick={onDeleteClick}>Delete</button>) : ""}
+                                           
                                         </div>
                                         
                                     </div>

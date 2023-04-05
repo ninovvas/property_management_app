@@ -13,4 +13,6 @@ router.get('/details/:propertyId', auth(), propertyController.getProperty);
 
 router.put('/edit/:propertyId', auth(), propertyController.editProperty);
 
+router.delete('/delete/:propertyId', auth(), propertyController.deleteProperty);
+
 module.exports = router

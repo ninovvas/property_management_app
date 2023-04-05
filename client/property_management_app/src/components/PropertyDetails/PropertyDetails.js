@@ -18,7 +18,15 @@ export const PropertyDetails = ({propertyService}) => {
         });
     }, [propertyId]);
 
-    const isOwner = property.userId === userId;
+    // const isOwner = property.userId === userId;
+
+    const onDeleteClick = async () => {
+        await propertyService.deleteProperty(propertyId);
+
+        setProperty({});
+
+        navigate('/property');
+    };
 
     return(
     <>
@@ -57,7 +65,7 @@ export const PropertyDetails = ({propertyService}) => {
                                         <div className="card-block">
                                             <p>City: {property.city}</p>
                                             <Link to={`/property/edit/${property._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link>
-                                            <Link to={`/property/delete/${property._id}`}><button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip">Delete</button></Link>
+                                            {property.tenancies && property.tenancies.length === 0 ? (<button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip" onClick={onDeleteClick}>Delete</button>): ""}
                                         </div>
                                         
                                     </div>

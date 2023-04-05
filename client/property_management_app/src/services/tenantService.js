@@ -44,13 +44,22 @@ export const tenantServiceFactory = (token) => {
         return result;
     }
 
+    
+    const deleteTenant = async (tenantId) => {
+        const result = await request.delete(`${url}/delete/${tenantId}`);
+        console.log(result);
+    
+        return result;
+    }
+
 
     return {
         createTenant,
         getAllTenants,
         getTenantById,
         editTenant,
-        getTenantByName
+        getTenantByName,
+        deleteTenant
         
     };
 

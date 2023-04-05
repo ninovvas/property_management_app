@@ -43,13 +43,21 @@ export const propertyServiceFactory = (token) => {
         return result;
     }
 
+    const deleteProperty = async (propertyId) => {
+        const result = await request.delete(`${url}/delete/${propertyId}`);
+        console.log(result);
+    
+        return result;
+    }
+
 
     return {
         createObject,
         getAllProperties,
         getPropertyById,
         editProperty,
-        getPropertyByName
+        getPropertyByName,
+        deleteProperty
     };
 
 

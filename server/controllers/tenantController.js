@@ -1,4 +1,4 @@
-const  {tenantModel, userModel} = require("../models");
+const  {tenantModel, userModel, tenancyModel} = require("../models");
 
 
 
@@ -88,6 +88,9 @@ function getTenant(req, res, next) {
         .populate({
             path : 'userId'
           })
+          .populate({
+            path : 'tenancies'
+          })
         .then(tenant => res.json(tenant))
         .catch(next);
 }
@@ -122,11 +125,40 @@ function editTenant(req, res, next){
 
 }
 
+function deleteTenant(req, res, next) {
+    const { tenantId } = req.params;
+    const { _id: userId } = req.user;
+
+    console.log('userId ' + userId)
+    console.log('tenantId ' + tenantId)
+    console.log(req.params);
+ 
+
+
+    Promise.all([
+        tenantModel.findOneAndDelete({ _id: tenantId, userId }),
+        userModel.findOneAndUpdate({ _id: userId }, { $pull: { tenants:  tenantId} }),
+        //tenancyModel.findOneAndUpdate({ _id: tenancyId }, { $pull: { tenantId: tenantId } }),
+        // propertyModel.findOneAndUpdate({ _id: propertyId }, { $pull: { tenancies: tenancyId } }),
+
+    ])
+        .then(([deletedOne, _, __]) => {
+            if (deletedOne) {
+                res.status(200).json(deletedOne)
+            } else {
+                res.status(401).json({ message: `Not allowed! to edit the page` });
+            }
+        })
+        .catch(next);
+}
+
+
 
 module.exports = {
     createTenant,
     getAllTenants,
     editTenant,
     getTenant,
-    getTenantByName
+    getTenantByName,
+    deleteTenant
 }

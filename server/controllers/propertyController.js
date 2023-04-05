@@ -127,10 +127,38 @@ function editProperty(req, res, next){
 
 }
 
+function deleteProperty(req, res, next) {
+    const { propertyId } = req.params;
+    const { _id: userId } = req.user;
+
+    console.log('userId ' + userId)
+    console.log('propertyId ' + propertyId)
+    console.log(req.params);
+ 
+
+
+    Promise.all([
+        propertyModel.findOneAndDelete({ _id: propertyId, userId }),
+        userModel.findOneAndUpdate({ _id: userId }, { $pull: { properties:  propertyId} }),
+        //tenancyModel.findOneAndUpdate({ _id: tenancyId }, { $pull: { tenantId: tenantId } }),
+        // propertyModel.findOneAndUpdate({ _id: propertyId }, { $pull: { tenancies: tenancyId } }),
+
+    ])
+        .then(([deletedOne, _, __]) => {
+            if (deletedOne) {
+                res.status(200).json(deletedOne)
+            } else {
+                res.status(401).json({ message: `Not allowed! to edit the page` });
+            }
+        })
+        .catch(next);
+}
+
 module.exports = {
     createProperty,
     getAllProperties,
     getProperty,
     editProperty,
-    getPropertyByName
+    getPropertyByName,
+    deleteProperty
 }

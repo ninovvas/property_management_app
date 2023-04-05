@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AutoContext";
+import { formatDate } from "../../utils/formatData";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 
@@ -18,7 +19,7 @@ export const TenancyDetails = ({tenancyService}) => {
        .then(result => {
             setTenancy(result);
         });
-    }, [tenancyId]);
+    }, [tenancyId, tenancyId.startTenancy, tenancyId.endTenancy]);
 
     //const isOwner = property.userId === userId;
     console.log("Tenancy Details");
@@ -73,8 +74,8 @@ export const TenancyDetails = ({tenancyService}) => {
                                         <div className="card-block">
                                       
                                             <p>Security Guaranty: {tenancy.securityGuaranty}</p>
-                                            <p>Start Tenancy: {tenancy.startTenancy}</p>
-                                            <p>End Tenancy: {tenancy.startTenancy}</p>
+                                            <p>Start Tenancy: {formatDate(tenancy.startTenancy)}</p>
+                                            <p>End Tenancy: {formatDate(tenancy.endTenancy)}</p>
                                             <p>Comment: {tenancy.comment}</p>
                                             
                                             <Link to={`/tenancy/edit/${tenancy._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link>

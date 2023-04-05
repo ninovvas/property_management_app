@@ -3,8 +3,8 @@ const { getAllTenants } = require("./tenantController");
 
 
 
-function newTenancy(contractNumber, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId) {
-    return tenancyModel.create({contractNumber, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId})
+function newTenancy(contractNumber, monthlyRent, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId) {
+    return tenancyModel.create({contractNumber, monthlyRent, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId})
         .then(tenancy => {
             console.log(tenancy);
             return Promise.all([
@@ -36,6 +36,7 @@ function getAllTenancies(req, res, next) {
 
 function createTenancy(req, res, next) {
     const { contractNumber } = req.body;
+    const { monthlyRent } = req.body;
     const { securityGuaranty } = req.body;
     const { startTenancy } = req.body;
     const { endTenancy } = req.body;
@@ -48,7 +49,7 @@ function createTenancy(req, res, next) {
     console.log("-----------createTenancy------------")
     console.log(req.body);
 
-    newTenancy(contractNumber, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId)
+    newTenancy(contractNumber, monthlyRent, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId)
         .then((updatedTenancy) => {
             console.log(updatedTenancy);
             res.status(200).json(updatedTenancy);
@@ -84,6 +85,7 @@ function getTenancy(req, res, next) {
 function editTenancy(req, res, next){
     const { _id: tenancyId } = req.body;
     const { contractNumber } = req.body;
+    const { monthlyRent } = req.body;
     const { securityGuaranty } = req.body;
     const { startTenancy } = req.body;
     const { endTenancy } = req.body;
@@ -108,7 +110,7 @@ function editTenancy(req, res, next){
     const tenantIdNew = tenantId._id;
     const propertyIdNew = propertyId._id
 
-    tenancyModel.findOneAndUpdate({ _id: tenancyId, userId }, {contractNumber, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId}, { new: true })
+    tenancyModel.findOneAndUpdate({ _id: tenancyId, userId }, {contractNumber, monthlyRent, securityGuaranty, startTenancy, endTenancy, comment, userId, tenantId, propertyId}, { new: true })
     .then(updatedTenancy => {
         if (updatedTenancy) {
             res.status(200).json(updatedTenancy);
