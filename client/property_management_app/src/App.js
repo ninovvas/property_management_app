@@ -89,6 +89,7 @@ function App() {
       
       const { confirmPassword, ...registerData } = values;
       if (confirmPassword !== registerData.password) {
+        setServerErrors({register: {message: "The password do not confirm!"}});
           return;
       }
 
@@ -99,8 +100,9 @@ function App() {
 
           navigate('/dashboard');
       } catch (error) {
+          setServerErrors({register: error});
           console.log('There is a problem');
-          //404
+         
       }
     };
 

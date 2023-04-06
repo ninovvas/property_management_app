@@ -7,7 +7,7 @@ import validator from "validator";
 
 import {AuthContext} from "../../contexts/AutoContext"
 import { useForm } from "../../hooks/useForm";
-
+import { isCorrectPassword } from "../../utils/isCorrectPassword";
 
 
 export const Login = () => {
@@ -28,24 +28,14 @@ export const Login = () => {
     const [showMessage, setShowMessage] = useState(false);
 
     useEffect(() => {
-        setShowMessage(false);
+        //setShowMessage(false);
     if(serverErrors.login && Object.keys(serverErrors.login).length > 0){
         setShowMessage(true);
     }
     },[serverErrors, values.email, values.password])
    
 
-    const isCorrectPassword = (password) => {
-        if (password && password.length <= 4) {
-            console.log(true);
-            return true;
-        } else {
-            console.log(false);
-            return false;
-        }
-    }
-    console.log("serverErrors");
-    console.log(showMessage);
+
 
     return (
         <>
@@ -116,7 +106,7 @@ export const Login = () => {
                                     ) : ("")}
                                  {isCorrectPassword(values.password) && errors.password ? (
                                 <div className="invalid-feedback">
-                                Password is not correct
+                                Password should be minimum 5 characters!
                                 </div>
                                     ) : ("")}
 
