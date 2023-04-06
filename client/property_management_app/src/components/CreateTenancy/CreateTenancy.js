@@ -68,6 +68,16 @@ export const CreateTenancy = ({
         });
         }, [values.tenantName, values.propertyName]);
 
+        
+        const [errors, setErrors] = useState({
+            monthlyRent: false,
+            securityGuaranty: false,
+            startTenancy: false,
+            endTenancy: false,
+            tenantName: false,
+            propertyName: false,
+        });
+
 
     return(
         <>
@@ -112,10 +122,11 @@ export const CreateTenancy = ({
                                                     <form method="post" onSubmit={onSubmit}>
                                                             <label forHtml="tenantId">Tenants</label>
                                                             <select 
-                                                                className="form-control" 
+                                                                className={(validator.isEmpty(values.tenantName) && errors.tenantName) ? "form-control is-invalid": "form-control"} 
                                                                 id="tenantName" 
                                                                 name="tenantName"
                                                                 value={values.tenantName}
+                                                                onBlur={() => setErrors({...errors, tenantName:true})}
                                                                 onChange={changeHandler}
 
                                                                 >
@@ -130,12 +141,19 @@ export const CreateTenancy = ({
                                                                     })}
                                                             </select>
 
+                                                            {validator.isEmpty(values.tenantName) && errors.tenantName ? (
+                                                                <div className="invalid-feedback">
+                                                                Please select a tenant. If the list is empty, please create first a tenant <Link to={"/create_tenant"}>Create Tenant</Link>
+                                                                </div>
+                                                                    ) : ("")}
+
                                                             <label forHtml="country">Properties</label>
                                                             <select 
-                                                                className="form-control" 
+                                                                className={(validator.isEmpty(values.propertyName) && errors.propertyName) ? "form-control is-invalid": "form-control"} 
                                                                 id="propertyName" 
                                                                 name="propertyName"
                                                                 value={values.propertyName}
+                                                                onBlur={() => setErrors({...errors, propertyName:true})}
                                                                 onChange={changeHandler}
 
                                                                 >
@@ -149,6 +167,12 @@ export const CreateTenancy = ({
                                                                         );
                                                                     })}
                                                             </select>
+
+                                                            {validator.isEmpty(values.propertyName) && errors.propertyName ? (
+                                                                <div className="invalid-feedback">
+                                                                Please select a property. If the list is empty, please create first a property <Link to={"/create_property"}>Create Property</Link>
+                                                                </div>
+                                                                    ) : ("")}
 
                                                             <div className="form-group">
                                                                 <label forHtml="monthlyRent">Monthly Rent</label>
