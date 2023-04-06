@@ -33,6 +33,7 @@ import { tenancyServiceFactory } from './services/tenancyService';
 import { TenancyList } from './components/Tenancy/TenancyList';
 import { TenancyDetails } from './components/TenancyDetails/TenancyDetails';
 import { EditTenancy } from './components/EditTenancy/EditTenancy';
+import { Profile } from './components/Profile/Profile';
 
 function App() {
 
@@ -45,6 +46,10 @@ function App() {
       //const [auth, setAuth] = useState({});
       const [auth, setAuth] = useLocalStorage('accessToken', {});
       const [tenancy, setTenancy] = useState({});
+      const [serverErrors, setServerErrors] = useState({
+        login: {},
+        register: {}
+      })
       
     const propertyService = propertyServiceFactory(auth.accessToken);
     const tenantService = tenantServiceFactory(auth.accessToken);
@@ -70,12 +75,13 @@ function App() {
             const result = await authService.login(data);
             console.log(auth.accessToken);
             setAuth(result);
+            setServerErrors({login:{}});
 
             navigate('/dashboard');
         } catch (error) {
           console.log(error)
-            console.log('There is a problem');
-            //navigate(/404)
+          setServerErrors({login: error});
+          console.log('There is a problem');
         }
     };
 
@@ -144,6 +150,7 @@ function App() {
 const onTenancySubmit = async (data) => {
   const newData = {
     contractNumber: data.contractNumber,
+    monthlyRent: data.monthlyRent,
     securityGuaranty: data.securityGuaranty,
     startTenancy: data.startTenancy,
     endTenancy: data.endTenancy,
@@ -165,6 +172,7 @@ const onTenancyEditSubmit = async (data) => {
   const newData = {
     _id: data._id,
     contractNumber: data.contractNumber,
+    monthlyRent: data.monthlyRent,
     securityGuaranty: data.securityGuaranty,
     startTenancy: data.startTenancy,
     endTenancy: data.endTenancy,
@@ -205,6 +213,7 @@ const onTenantEditSubmit = async (values) => {
         onTenantEditSubmit,
         onTenancySubmit,
         onTenancyEditSubmit,
+        serverErrors,
         firstName: auth.first_name,
         lastName: auth.last_name,
         address: auth.address,
@@ -231,6 +240,7 @@ const onTenantEditSubmit = async (values) => {
                 <Route path='/create_tenancy/' element={<CreateTenancy tenantService={tenantService} propertyService={propertyService}/>}></Route>
                 <Route path='/tenancy/' element={<TenancyList tenancyService={tenancyService} />}></Route>
                 <Route path='/tenants/' element={<TenantList tenantService={tenantService} />}></Route>
+                <Route path='/profile' element={<Profile />}></Route>
                 <Route path='/property/details/:propertyId' element={<PropertyDetails propertyService={propertyService}/>} />
                 <Route path='/property/edit/:propertyId' element={<EditProperty propertyService={propertyService}/>} />
                 <Route path='/tenant/details/:tenantId' element={<TenantDetails tenantService={tenantService}/>} />

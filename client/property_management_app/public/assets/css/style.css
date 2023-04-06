@@ -7385,7 +7385,7 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
 
 /**====== Foo-table css end ======**/
 /**====== Data Tables css end ======**/
-/**  =====================
+/* *  =====================
       Authentication css start
 ==========================  **/
 .auth-wrapper {
@@ -7508,7 +7508,7 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
           animation: floating 9s infinite;
 }
 
-/* image varient start */
+/*image varient start  */
 .aut-bg-img {
   background-image: url("../images/bg-images/bg4.jpg");
   background-size: cover;
@@ -7559,8 +7559,8 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
     -webkit-transform: rotate(360deg) translate(-10px) rotate(-360deg);
             transform: rotate(360deg) translate(-10px) rotate(-360deg);
   }
-}
-/**====== Authentication css end ======**/
+} 
+/**====== Authentication css end ======* */
 /* Button variants
  Easily pump out default styles, as well as :hover, :focus, :active,
  and disabled options for all buttons */

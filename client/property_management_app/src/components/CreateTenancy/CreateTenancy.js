@@ -21,6 +21,7 @@ export const CreateTenancy = ({
 
     const { values, changeHandler, onSubmit } = useForm({
         contractNumber: String(Math.random()).substring(2,11),
+        monthlyRent: 0,
         securityGuaranty: 0,
         startTenancy: new Date(),
         endTenancy: new Date(),
@@ -148,6 +149,20 @@ export const CreateTenancy = ({
                                                                         );
                                                                     })}
                                                             </select>
+
+                                                            <div className="form-group">
+                                                                <label forHtml="monthlyRent">Monthly Rent</label>
+                                                                <input 
+                                                                type="number" 
+                                                                className="form-control" 
+                                                                id="monthlyRent" 
+                                                                name="monthlyRent" 
+                                                                placeholder="Enter the monthly rent"
+                                                                value={values.monthlyRent}
+                                                                onChange={changeHandler}
+                                                                />
+                                                                
+                                                            </div>
                                                        
 
                                                             <div className="form-group">

@@ -7,6 +7,10 @@ const tenancySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    monthlyRent: {
+        type: Number,
+        required: true
+    },
     securityGuaranty: {
         type: Number,
         required: true

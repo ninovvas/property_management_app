@@ -29,6 +29,7 @@ export const EditTenancy = ({
     const { values, changeHandler, onSubmit, changeValues } = useForm({
         _id: tenancyId,
         contractNumber: String(Math.random()).substring(2,11),
+        monthlyRent: 0,
         securityGuaranty: 0,
         startTenancy: new Date(),
         endTenancy: new Date(),
@@ -47,26 +48,6 @@ export const EditTenancy = ({
                 //state => ({...state, [e.target.name]: e.target.value})
                 //console.log(formData);
             });
-        // tenantService.getAllTenants()
-        // .then(result => {
-        //     setTenants(result)
-        // });
-        // propertyService.getAllProperties()
-        // .then(result => {
-        //     setProperties(result)
-        // });
-        // tenantService.getTenantByName(values.tenantName)
-        //     .then(result => {
-        //         console.log("getTenantByName");
-        //         console.log(result._id);
-        //         values.tenantId = result._id;
-        //     });
-        // propertyService.getPropertyByName(values.propertyName)
-        // .then(result => {
-        //     console.log("propertyName");
-        //     console.log(result);
-        //     values.propertyId = result._id;
-        // });
     }, [tenancyId]);
 
 
@@ -158,8 +139,20 @@ export const EditTenancy = ({
                                                                 
                                                             </div>
 
-                                                           
-                                                           
+                                                            <div className="form-group">
+                                                                <label forHtml="monthlyRent">Monthly Rent</label>
+                                                                <input 
+                                                                type="number" 
+                                                                className="form-control" 
+                                                                id="monthlyRent" 
+                                                                name="monthlyRent" 
+                                                                placeholder="Enter the monthly rent"
+                                                                value={values.monthlyRent}
+                                                                onChange={changeHandler}
+                                                                />
+                                                                
+                                                            </div>
+
                                                             
                                                             <div className="form-group">
                                                                 <label forHtml="securityGuaranty">Security Guaranty</label>
