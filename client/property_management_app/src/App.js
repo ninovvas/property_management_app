@@ -233,6 +233,7 @@ const onTenantEditSubmit = async (values) => {
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>
+             
               <Route element={<RouteGuard />}>
                 <Route path='/dashboard' element={<Dashboard />}></Route>
                 <Route path='/logout' element={<Logout />}></Route>
@@ -250,6 +251,7 @@ const onTenantEditSubmit = async (values) => {
                 <Route path='/tenancy/details/:tenancyId' element={<TenancyDetails tenancyService={tenancyService}/>} />
                 <Route path='/tenancy/edit/:tenancyId' element={<EditTenancy tenancyService={tenancyService} tenantService={tenantService} propertyService={propertyService}/>} />
               </Route>
+              
             </Routes>
           </>
         </AuthContext.Provider>

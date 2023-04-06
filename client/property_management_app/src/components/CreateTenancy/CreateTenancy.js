@@ -72,7 +72,7 @@ export const CreateTenancy = ({
     return(
         <>
         <NavigationMenu />
-                <Header />
+        <Header />
         <div className="pcoded-main-container">
             <div className="pcoded-wrapper">
                 <div className="pcoded-content">

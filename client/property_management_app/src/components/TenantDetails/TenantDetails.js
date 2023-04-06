@@ -50,7 +50,8 @@ export const TenantDetails = ({tenantService}) => {
                                     </div>
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
-                                        <li className="breadcrumb-item"><Link to={"#"}>Property Details</Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/tenants"}>My Tenants</Link></li>
+                                        <li className="breadcrumb-item"><Link to={"#"}>Tenant Details</Link></li>
                                     </ul>
                                 </div>
                             </div>
