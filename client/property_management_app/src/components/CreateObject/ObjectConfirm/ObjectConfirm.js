@@ -3,10 +3,6 @@ import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AutoContext";
 
 
-
-
-import * as propertyService from "../../../services/propertyService";
-
 export const ObjectConfirm = ({prevStep, values, titleButton, action}) => {
     
     const { onCreatePropertySubmit, onEditPropertySubmit } = useContext(AuthContext);
@@ -17,14 +13,6 @@ export const ObjectConfirm = ({prevStep, values, titleButton, action}) => {
        
         e.preventDefault();
 
-        
-        // propertyService.createObject(values)
-        // .then(propertyData => {
-        //     console.log(propertyData);
-        //     navigate("/dashboard");
-        // })
-        console.log("values");
-        console.log(values);
         if (action === "create") {
             onCreatePropertySubmit(values);
         }
@@ -33,31 +21,7 @@ export const ObjectConfirm = ({prevStep, values, titleButton, action}) => {
             onEditPropertySubmit(values);
         }
 
-       
-
     
-    
-         // checking if value of first name and last name is empty show error else take to next step
-        
-        // if (validator.isEmpty(values.objectType) || 
-        //     values.commercialProperties === 0 ||
-        //     values.garages === 0 ||
-        //     values.others === 0 ||
-        //     values.residentialUnits === 0 ) {
-        //   setError(true);
-    
-        // } else {
-        //   nextStep();
-        // }
-        //nextStep();
-
-        // street
-        // streetNumber
-        // country
-        // state
-        // city
-        // objectRelation
-        // objectType
       };
 
     return(

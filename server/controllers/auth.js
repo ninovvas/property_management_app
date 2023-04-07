@@ -112,13 +112,31 @@ function getProfileInfo(req, res, next) {
     const { _id: userId } = req.user;
 
     userModel.findOne({ _id: userId }, { password: 0, __v: 0 }) //finding by Id and returning without password and __v
-        .then(user => { res.status(200).json(user) })
+    .populate({
+        path : 'properties',
+      })
+      .populate({
+        path : 'tenants'
+      })
+      .populate({
+        path : 'tenancies'
+      })
+    .then(user => { res.status(200).json(user) })
         .catch(next);
 }
 
 function editProfileInfo(req, res, next) {
     const { _id: userId } = req.user;
     const { username, email, first_name, last_name, address } = req.body;
+
+    console.log(userId);
+    console.log(username);
+    console.log(email);
+    console.log(first_name);
+    console.log(last_name);
+    console.log(address);
+
+
 
     userModel.findOneAndUpdate({ _id: userId }, { username, email, first_name, last_name, address}, { runValidators: true, new: true })
         .then(x => { res.status(200).json(x) })
