@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Header } from "../Header/Header";
-import { NavigationMenu } from "../Navigation/NavigationMenu";
 import { TenancyItem } from "./TenancyItem/TenancyItem";
+import { Link } from "react-router-dom";
 
 export const TenancyList = ({tenancyService}) => {
     const [tenancies, setTenancies] = useState([]);
@@ -19,14 +18,33 @@ export const TenancyList = ({tenancyService}) => {
         <div className="pcoded-wrapper">
             <div className="pcoded-content">
                 <div className="pcoded-inner-content">
+
+                    <div className="page-header">
+                        <div className="page-block">
+                            <div className="row align-items-center">
+                                <div className="col-md-12">
+                                    <div className="page-header-title">
+                                        <h5 className="m-b-10">Tenancies</h5>
+                                    </div>
+                                    <ul className="breadcrumb">
+                                        <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to={"#"}>My Tenancies</Link></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="main-body">
                         <div className="page-wrapper">
                             <div className="row">
                                 <div className="col-sm-12">
                                     <div className="card">
                                         <div className="card-body">
-                                            <h5>Summary Tenants</h5>
-                                            <div className="row">
+                                            <div className="card-header">
+                                                <h5>List my Tenancies</h5>
+                                            </div>
+                                            <div className="row distance">
                                                 <div className="col-md-6">
                                                 {tenancies.map(t =>
                                                     <TenancyItem key={t._id} {...t} />

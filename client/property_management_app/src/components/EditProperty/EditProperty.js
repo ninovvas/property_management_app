@@ -19,6 +19,13 @@ export const EditProperty = ({propertyService}) => {
     const titleButton = "Edit Property";
     const action = "edit";
 
+    const titles = {
+      h5Title: "Edit Property",
+      detailTitle: "Details Property",
+      currentTitle: "Edit Property",
+
+    }
+
     const [step, setStep] = useState(1);
 
     const [formData, setFormData] = useState({
@@ -81,7 +88,7 @@ export const EditProperty = ({propertyService}) => {
       return (
         <>
        
-        <Address nextStep={nextStep} handleFormData={handleInputData} values={formData} />
+        <Address nextStep={nextStep} handleFormData={handleInputData} values={formData} action={action} titles={titles} />
         </>
            
       );
@@ -90,14 +97,14 @@ export const EditProperty = ({propertyService}) => {
       return (
         <>
            
-            <Object nextStep={nextStep} prevStep={prevStep} handleFormData={handleInputData} values={formData} />
+            <Object nextStep={nextStep} prevStep={prevStep} handleFormData={handleInputData} values={formData} action={action} titles={titles} />
         </>
       );
       case 3:
       return (
         <>
             
-            <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton} action={action}/>
+            <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton} action={action} titles={titles} />
         </>
       );
     // default case to show nothing

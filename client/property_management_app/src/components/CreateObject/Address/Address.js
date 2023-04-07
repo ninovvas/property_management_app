@@ -1,11 +1,12 @@
 import './Address.module.css';
 import { useState } from "react";
 import { Country, State, City }  from 'country-state-city';
+import { Link } from "react-router-dom";
 import validator from "validator";
 
 
 
-export const Address = ({nextStep, handleFormData, values}) => {
+export const Address = ({nextStep, handleFormData, values, action, titles}) => {
 
     //creating error state for validation
     const [error, setError] = useState(false);
@@ -19,64 +20,17 @@ export const Address = ({nextStep, handleFormData, values}) => {
 
     console.log(errors);
 
-    // const [buttonStatus, setButtonStatus] = useState(false);
-    // //let buttonStatus;
-    // if (errors.errCity && errors.errCountry && errors.errState && errors.errStreet && errors.errStreetNumber) {
-    //     //buttonStatus = false;
-    //     setButtonStatus(true);
-    // } else {
-    //     //buttonStatus = false;
-    //     setButtonStatus(false);
-    // }
-    // console.log(buttonStatus)
-    // const [selectedCountry, setSelectedCountry] = useState("");
-    // const [selectedState, setSelectedState] = useState("");
-    // const [selectedCity, setSelectedCity] = useState("");
-
-
-
-      //let Country = require('country-state-city').Country;
-      //let State = require('country-state-city').State;
 
     
       const countries = Country.getAllCountries();
       const states = State.getAllStates();
-      //const cities = City.getAllCities()
-     //console.log(cities);
-      //console.log(countries);
-      //const states = State.get;
-      //console.log(states);
+      
       const availableState = countries.find((c) => c.name == values.country)
       //console.log(selectedState);
       const availableCity = states.find((s) => s.name == values.state);
       console.log(availableCity)
       console.log(values)
-    //   values.city = selectedCity;
-    //   values.state = selectedState;
-    //   values.country = selectedCountry;
-      //const citiesTest = City.getCitiesOfState(availableCity?.countryCode, availableCity?.isoCode)
-      //console.log(citiesTest)
-
-    //   const updatedCountries = countries.map((country) => ({
-    //     key: country.id,
-    //     label: country.name,
-    //     value: country.id,
-    //     ...country
-    //   }));
-
-    //   const onCountryChange = (e) => {
-    //     setSelectedCountry(e.target.value);
-    //     //handleFormData(e.target.value);
-    //     }
-
-    //     const onSelectedState = (e) => {
-    //         setSelectedState(e.target.value);
-    //      //   handleFormData(e.target.value);
-    //         }
-    //     const onSelectedCity = (e) => {
-    //         setSelectedCity(e.target.value);
-    //       //  handleFormData(e.target.value);
-    //     }
+    
 
     const submitFormData = (e) => {
         e.preventDefault();
@@ -96,28 +50,32 @@ export const Address = ({nextStep, handleFormData, values}) => {
        // nextStep()
       };
      
-        //const availableState = countries.find((c) => c.name === selectedCountry);
-       
-
-        //console.log(selectedCountry);
-        
-        //console.log(State.getStatesOfCountry(selectedCountry));
-    //   const updatedStates = () =>
-    //   State
-    //       .getStatesOfCountry(selectedCountry)
-    //       .map((state, key) => ({ key: state.id, label: state.name, value: state.id, ...state }));
-    //       console.log(updatedStates)
-
-    //   const updatedCities = (stateId) =>
-    //   City
-    //       .getCitiesOfState(stateId)
-    //       .map((city) => ({ key: city.id, label: city.name, value: city.id, ...city }));
-    //       console.log(updatedCities)
+     
     return (
         <div className="pcoded-main-container">
         <div className="pcoded-wrapper">
             <div className="pcoded-content">
                 <div className="pcoded-inner-content">
+
+                <div className="page-header">
+                        <div className="page-block">
+                            <div className="row align-items-center">
+                                <div className="col-md-12">
+                                    <div className="page-header-title">
+                                        <h5 className="m-b-10">{titles.h5Title}</h5>
+                                    </div>
+                                    <ul className="breadcrumb">
+                                        <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/property"}>My Properties</Link></li>
+                                        {action === "edit" ? (<li className="breadcrumb-item"><Link to={`/property/details/${values._id}`}>{titles.detailTitle}</Link></li>) : 
+                                        ("")}
+                                        <li className="breadcrumb-item"><Link to={"#"}>{titles.currentTitle}</Link></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="main-body">
                         <div className="page-wrapper">
                             <div className="row">
@@ -128,42 +86,7 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <form onSubmit={submitFormData}>
-                                                        <div className="form-row">
-                                                            <div className="col">
-                                                                <label for="street">Street</label>
-                                                                <input 
-                                                                type="text" 
-                                                                className={validator.isEmpty(values.street) && errors.errStreet ? "form-control is-invalid": "form-control"}  
-                                                                name="street" 
-                                                                id="street" 
-                                                                placeholder="Street"
-                                                                value={values.street}
-                                                                onChange={handleFormData("street")} 
-                                                                onBlur={() => setErrors({...errors, errStreet:true})}/>
-                                                                {validator.isEmpty(values.street) && errors.errStreet ? (
-                                                                <div className="invalid-feedback">
-                                                                This is a required field
-                                                                </div>
-                                                                    ) : ("")}
-                                                            </div>
-                                                            <div className="col">
-                                                                <label for="streetNumber">Street number</label>
-                                                                <input 
-                                                                type="number" 
-                                                                className={validator.isEmpty(values.streetNumber) && errors.errStreetNumber ? "form-control is-invalid": "form-control"} 
-                                                                name="streetNumber" 
-                                                                id="streetNumber" 
-                                                                placeholder="Street number"
-                                                                value={values.streetNumber}
-                                                                onChange={handleFormData("streetNumber")}
-                                                                onBlur={() => setErrors({...errors, errStreetNumber:true})} />
-                                                                {validator.isEmpty(values.streetNumber) && errors.errStreetNumber ? (
-                                                                <div className="invalid-feedback">
-                                                                    This is a required field
-                                                                </div>
-                                                                    ) : ("")}
-                                                            </div>
-                                                        </div>
+                                                        
                                                         <label forHtml="country">Country</label>
                                                         <select 
                                                             className={validator.isEmpty(values.country) && errors.errCountry ? "form-control is-invalid": "form-control"} 
@@ -237,6 +160,42 @@ export const Address = ({nextStep, handleFormData, values}) => {
                                                                     This is a required field
                                                                 </div>
                                                                     ) : ("")}
+                                                        <div className="form-row">
+                                                            <div className="col">
+                                                                <label for="street">Street</label>
+                                                                <input 
+                                                                type="text" 
+                                                                className={validator.isEmpty(values.street) && errors.errStreet ? "form-control is-invalid": "form-control"}  
+                                                                name="street" 
+                                                                id="street" 
+                                                                placeholder="Street"
+                                                                value={values.street}
+                                                                onChange={handleFormData("street")} 
+                                                                onBlur={() => setErrors({...errors, errStreet:true})}/>
+                                                                {validator.isEmpty(values.street) && errors.errStreet ? (
+                                                                <div className="invalid-feedback">
+                                                                This is a required field
+                                                                </div>
+                                                                    ) : ("")}
+                                                            </div>
+                                                            <div className="col">
+                                                                <label for="streetNumber">Street number</label>
+                                                                <input 
+                                                                type="number" 
+                                                                className={validator.isEmpty(values.streetNumber) && errors.errStreetNumber ? "form-control is-invalid": "form-control"} 
+                                                                name="streetNumber" 
+                                                                id="streetNumber" 
+                                                                placeholder="Street number"
+                                                                value={values.streetNumber}
+                                                                onChange={handleFormData("streetNumber")}
+                                                                onBlur={() => setErrors({...errors, errStreetNumber:true})} />
+                                                                {validator.isEmpty(values.streetNumber) && errors.errStreetNumber ? (
+                                                                <div className="invalid-feedback">
+                                                                    This is a required field
+                                                                </div>
+                                                                    ) : ("")}
+                                                            </div>
+                                                        </div>
                                                         
                                                         {validator.isEmpty(values.street) ||
                                                         validator.isEmpty(values.streetNumber) ||

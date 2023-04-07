@@ -3,8 +3,7 @@ import validator from "validator";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AutoContext";
 import { useForm } from "../../hooks/useForm";
-import { Header } from "../Header/Header";
-import { NavigationMenu } from "../Navigation/NavigationMenu";
+
 
 export const CreateTenant = () => {
 
@@ -49,7 +48,7 @@ export const CreateTenant = () => {
                                 <div className="row align-items-center">
                                     <div className="col-md-12">
                                         <div className="page-header-title">
-                                            <h5 className="m-b-10">Tenant</h5>
+                                            <h5 className="m-b-10">Create Tenant</h5>
                                         </div>
                                         <ul className="breadcrumb">
                                             <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>

@@ -4,6 +4,8 @@ import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 import { PropertyItem } from "./PropertyItem/PropertyItem";
 
+import "./Property.Module.css"
+
 export const Property = ({propertyService}) => {
     const [properties, setProperties] = useState([]);
 
@@ -29,7 +31,7 @@ export const Property = ({propertyService}) => {
                                         </div>
                                         <ul className="breadcrumb">
                                             <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
-                                            <li className="breadcrumb-item"><Link to={"#"}>Property Items</Link></li>
+                                            <li className="breadcrumb-item"><Link to={"/property"}>My Properties</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -43,8 +45,11 @@ export const Property = ({propertyService}) => {
                                 <div className="col-sm-12">
                                     <div className="card">
                                         <div className="card-body">
-                                            <h5>List all my properties</h5>
-                                            <div className="row">
+                                             <div className="card-header">
+                                                <h5>List all my properties</h5>
+                                            </div>
+                                            
+                                            <div className="row distance">
                                                 <div className="col-md-6">
                                                 {properties.map(p =>
                                                     <PropertyItem key={p._id} {...p} />
@@ -57,11 +62,7 @@ export const Property = ({propertyService}) => {
 
 
                                                 </div>
-                                                
-
-                                                                           
-                                                
-                                                
+                                             
                                             </div>
                                             
                                             </div>

@@ -67,14 +67,15 @@ export const TenantDetails = ({tenantService}) => {
                                             <h5>{tenant.firstName}, {tenant.lastName}</h5>
                                         </div>
                                         <div className="card-block">
-                                            <p>Email: {tenant.email}</p>
-                                            <p>Address: {tenant.address}</p>
-                                            <p>Phone number: {tenant.phone}</p>
-                                            <p>IBAN: {tenant.iban}</p>
-                                            <p>BIC/SWIFT: {tenant.bic}</p>
-                                            <Link to={`/tenant/edit/${tenant._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link> 
+                                        <p className="card-text"><i className="feather icon-mail distance-right"></i><span className="title">Email:</span> {tenant.email}</p>
+                                        <p className="card-text"><i className="feather icon-phone distance-right"></i><span className="title">Phone Number:</span> {tenant.phone}</p>
+                                        <p className="card-text"><i className="feather icon-map distance-right"></i><span className="title">Address:</span> {tenant.address}</p>
+                                        <p className="card-text"><i className="feather icon-layers distance-right"></i><span className="title">IBAN:</span> {tenant.iban ? (tenant.iban) : ("no available")}</p>
+                                        <p className="card-text"><i className="feather icon-cast distance-right"></i><span className="title">BIC/SWIFT:</span> {tenant.bic ? (tenant.bic) : ("no available")}</p>
+                                        <Link to={`/tenant/edit/${tenant._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link> 
                                             {tenant.tenancies && tenant.tenancies.length === 0 ? ( <button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip" onClick={onDeleteClick}>Delete</button>) : ""}
                                            
+                                            
                                         </div>
                                         
                                     </div>

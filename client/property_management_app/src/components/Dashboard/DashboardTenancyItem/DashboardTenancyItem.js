@@ -17,7 +17,7 @@ export const DashboardTenancyItem = ({
 <tr className="unread">
     <td>
         <h6 className="mb-1">Contract Number: {contractNumber}</h6>
-        <p className="m-0">Monthly Rent{monthlyRent}</p>
+        <p className="m-0">Monthly Rent: {monthlyRent}</p>
     </td>
     <td>
         {propertyId ? (<h6 className="text-muted"><i className="fas fa-circle text-c-green f-10 m-r-15"></i>Property: {propertyId.street} {propertyId.streetNumber}</h6>):

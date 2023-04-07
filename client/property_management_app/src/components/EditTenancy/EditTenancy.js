@@ -88,11 +88,12 @@ export const EditTenancy = ({
                                 <div className="row align-items-center">
                                     <div className="col-md-12">
                                         <div className="page-header-title">
-                                            <h5 className="m-b-10">Tenant</h5>
+                                            <h5 className="m-b-10">Edit Tenancy</h5>
                                         </div>
                                         <ul className="breadcrumb">
                                             <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
                                             <li className="breadcrumb-item"><Link to={"/tenancies"}>My Tenancies</Link></li>
+                                            <li className="breadcrumb-item"><Link to={`/tenancy/details/${tenancyId}`}>Details Tenancy</Link></li>
                                             <li className="breadcrumb-item"><Link to={"#"}>Edit Tenancy</Link></li>
                                         </ul>
                                     </div>
@@ -108,7 +109,7 @@ export const EditTenancy = ({
 
                                         <div className="card">
                                             <div className="card-header">
-                                                <h5>Create new tenancy</h5>
+                                                <h5>Edit Tenancy</h5>
                                             </div>
                                             <div className="card-body">
                                                 

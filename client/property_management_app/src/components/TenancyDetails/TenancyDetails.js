@@ -54,6 +54,7 @@ export const TenancyDetails = ({tenancyService}) => {
                                     </div>
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/tenancy"}>My Tenancies</Link></li>
                                         <li className="breadcrumb-item"><Link to={"#"}>Tenancy Details</Link></li>
                                     </ul>
                                 </div>
@@ -68,14 +69,15 @@ export const TenancyDetails = ({tenancyService}) => {
                                 <div className="col-sm-12">
                                     <div className="card">
                                         <div className="card-header">
-                                            <h5>Contract number: {tenancy.contractNumber}</h5>
+                                            <h5><i className="feather icon-file distance-right"></i> Contract number  <i className="feather icon-arrow-right distance-right"></i> {tenancy.contractNumber}</h5>
                                         </div>
                                         <div className="card-block">
+                                        <p className="card-text"><i className="feather icon-arrow-up-right distance-right"></i><span className="title">Monthly Rent: </span> {tenancy.monthlyRent}</p>
+                                        <p className="card-text"><i className="feather icon-arrow-up-right distance-right"></i><span className="title">Security Guaranty: </span> {tenancy.securityGuaranty}</p>
+                                        <p className="card-text"><i className="feather icon-calendar distance-right"></i><span className="title">Start Tenancy: </span>{formatDate(tenancy.startTenancy)}</p>
+                                        <p className="card-text"><i className="feather icon-calendar distance-right"></i><span className="title">End Tenancy: </span>{formatDate(tenancy.endTenancy)}</p>
+                                        <p className="card-text"><i className="feather icon-clipboard distance-right"></i><span className="title">Comment: </span>{tenancy.comment ? (tenancy.comment) : ("no comment")}</p>
                                       
-                                            <p>Security Guaranty: {tenancy.securityGuaranty}</p>
-                                            <p>Start Tenancy: {formatDate(tenancy.startTenancy)}</p>
-                                            <p>End Tenancy: {formatDate(tenancy.endTenancy)}</p>
-                                            <p>Comment: {tenancy.comment}</p>
                                             
                                             <Link to={`/tenancy/edit/${tenancy._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link>
                                             <button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip" onClick={onDeleteClick}>Delete</button>

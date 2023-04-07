@@ -93,7 +93,7 @@ export const CreateTenancy = ({
                                 <div className="row align-items-center">
                                     <div className="col-md-12">
                                         <div className="page-header-title">
-                                            <h5 className="m-b-10">Tenant</h5>
+                                            <h5 className="m-b-10">Tenancy</h5>
                                         </div>
                                         <ul className="breadcrumb">
                                             <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>

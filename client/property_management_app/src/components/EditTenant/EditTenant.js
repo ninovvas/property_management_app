@@ -61,12 +61,12 @@ export const EditTenant = ({
                             <div className="row align-items-center">
                                 <div className="col-md-12">
                                     <div className="page-header-title">
-                                        <h5 className="m-b-10">Tenant</h5>
+                                        <h5 className="m-b-10">Edit Tenant</h5>
                                     </div>
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
                                         <li className="breadcrumb-item"><Link to={"/tenants"}>My Tenants</Link></li>
-                                        <li className="breadcrumb-item"><Link to={`/tenant/details/${tenantId}`}>Details</Link></li>
+                                        <li className="breadcrumb-item"><Link to={`/tenant/details/${tenantId}`}>Details Tenant</Link></li>
                                         <li className="breadcrumb-item"><Link to={"#"}>Edit Tenant</Link></li>
                                     </ul>
                                 </div>
@@ -82,7 +82,7 @@ export const EditTenant = ({
 
                                         <div className="card">
                                             <div className="card-header">
-                                                <h5>Edit tenant</h5>
+                                                <h5>Edit Tenant</h5>
                                             </div>
                                             <div className="card-body">
                                                 

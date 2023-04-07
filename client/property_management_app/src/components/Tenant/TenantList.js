@@ -4,6 +4,8 @@ import { NavigationMenu } from "../Navigation/NavigationMenu";
 import { TenantItem } from "./TenantItem/TenantItem";
 import { Link } from "react-router-dom";
 
+import "./TenantList.Module.css"
+
 export const TenantList = ({tenantService}) => {
     const [tenants, setTenants] = useState([]);
 
@@ -43,8 +45,10 @@ export const TenantList = ({tenantService}) => {
                                 <div className="col-sm-12">
                                     <div className="card">
                                         <div className="card-body">
-                                            <h5>List all my Tenants</h5>
-                                            <div className="row">
+                                            <div className="card-header">
+                                                <h5>List all my Tenants</h5>
+                                            </div>
+                                            <div className="row distance">
                                                 <div className="col-md-6">
                                                 {tenants.map(t =>
                                                     <TenantItem key={t._id} {...t} />

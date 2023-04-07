@@ -97,8 +97,6 @@ function App() {
     };
 
 
-
-
       const onLogout = async () => {
         const result = await authService.logout();
         console.log(result);

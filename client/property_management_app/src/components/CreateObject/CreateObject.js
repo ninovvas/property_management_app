@@ -13,6 +13,12 @@ export const CreateObject = () => {
 
     const titleButton= "Create Property";
     const action = "create";
+    const titles = {
+      h5Title: "Create Property",
+      detailTitle: "",
+      currentTitle: "Create Property",
+
+    }
 
     const [step, setStep] = useState(1);
 
@@ -54,7 +60,7 @@ export const CreateObject = () => {
       return (
         <>
        
-        <Address nextStep={nextStep} handleFormData={handleInputData} values={formData} />
+        <Address nextStep={nextStep} handleFormData={handleInputData} values={formData} action={action} titles={titles}/>
         </>
            
       );
@@ -63,14 +69,14 @@ export const CreateObject = () => {
       return (
         <>
             
-            <Object nextStep={nextStep} prevStep={prevStep} handleFormData={handleInputData} values={formData} />
+            <Object nextStep={nextStep} prevStep={prevStep} handleFormData={handleInputData} values={formData} action={action} titles={titles} />
         </>
       );
       case 3:
       return (
         <>
            
-            <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton} action={action}/>
+            <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton} action={action} titles={titles}/>
         </>
       );
     // default case to show nothing
