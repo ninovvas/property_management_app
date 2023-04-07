@@ -31,6 +31,7 @@ import { EditTenancy } from './components/EditTenancy/EditTenancy';
 import { Profile } from './components/Profile/Profile';
 import { profileServiceFactory } from './services/profileService';
 import { EditProfile } from './components/EditProfile/EditProfile';
+import { ErrorMessages } from './components/ErrorMessages/ErrorMessages';
 
 function App() {
 
@@ -220,7 +221,7 @@ const onTenantEditSubmit = async (values) => {
           
          
             <Routes>
-              <Route path='*' element={<h1>404</h1>} />
+            <Route path='*' element={<ErrorMessages />} />
               <Route path='/' element={<Home propertyService={propertyService} tenantService={tenantService} tenancyService={tenancyService} />} />
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>
