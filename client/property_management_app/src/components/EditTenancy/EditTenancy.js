@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import validator from "validator";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AutoContext";
 import { useForm } from "../../hooks/useForm";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 import { formatDate } from "../../utils/formatData";
+import validator from "validator";
+import { negativeValue } from "../../utils/negativeValue";
 
 export const EditTenancy = ({
     tenantService,
@@ -54,14 +55,23 @@ export const EditTenancy = ({
 
    
 
-    console.log("EditTenancy");
-    console.log(values);
-    console.log(typeof(values.startTenancy)); 
-    console.log(formatDate(values.startTenancy));
-    console.log("values.tenantName", values.tenantName);
-    console.log("values.propertyName", values.propertyName);
+    // console.log("EditTenancy");
+    // console.log(values);
+    // console.log(typeof(values.startTenancy)); 
+    // console.log(formatDate(values.startTenancy));
+    // console.log("values.tenantName", values.tenantName);
+    // console.log("values.propertyName", values.propertyName);
     //console.log(typeof(values.startTenancy));
     //console.log(values.startTenancy);
+
+    const [errors, setErrors] = useState({
+        monthlyRent: false,
+        securityGuaranty: false,
+        startTenancy: false,
+        endTenancy: false,
+        tenantName: false,
+        propertyName: false,
+    });
    
 
    
@@ -143,30 +153,45 @@ export const EditTenancy = ({
                                                                 <label forHtml="monthlyRent">Monthly Rent</label>
                                                                 <input 
                                                                 type="number" 
-                                                                className="form-control" 
+                                                                className={(negativeValue(values.monthlyRent)  && errors.monthlyRent) || ( validator.isEmpty(String(values.monthlyRent))) ? "form-control is-invalid": "form-control"} 
                                                                 id="monthlyRent" 
                                                                 name="monthlyRent" 
                                                                 placeholder="Enter the monthly rent"
                                                                 value={values.monthlyRent}
+                                                                onBlur={() => setErrors({...errors, monthlyRent:true})}
                                                                 onChange={changeHandler}
                                                                 />
+
+                                                                {(negativeValue(values.monthlyRent)   && errors.monthlyRent) || ( validator.isEmpty(String(values.monthlyRent))) ? (
+                                                                <div className="invalid-feedback">
+                                                                This is a required field and the value should be positive and not zero.
+                                                                </div>
+                                                                    ) : ("")}
                                                                 
                                                             </div>
+                                                       
 
-                                                            
                                                             <div className="form-group">
                                                                 <label forHtml="securityGuaranty">Security Guaranty</label>
                                                                 <input 
                                                                 type="number" 
-                                                                className="form-control" 
+                                                                className={(negativeValue(values.securityGuaranty)  && errors.securityGuaranty) || ( validator.isEmpty(String(values.securityGuaranty))  && errors.securityGuaranty) ? "form-control is-invalid": "form-control"}  
                                                                 id="securityGuaranty" 
                                                                 name="securityGuaranty" 
                                                                 placeholder="Enter the security guaranty"
                                                                 value={values.securityGuaranty}
+                                                                onBlur={() => setErrors({...errors, securityGuaranty:true})}
                                                                 onChange={changeHandler}
                                                                 />
+
+                                                                {(negativeValue(values.securityGuaranty)   && errors.securityGuaranty) || ( validator.isEmpty(String(values.securityGuaranty))  && errors.securityGuaranty) ? (
+                                                                <div className="invalid-feedback">
+                                                                This is a required field and the value should be positive and not zero.
+                                                                </div>
+                                                                    ) : ("")}
                                                                 
                                                             </div>
+
 
                                                             <div className="form-group">
                                                                 <label forHtml="startTenancy">Start Tenancy</label>
@@ -209,9 +234,18 @@ export const EditTenancy = ({
                                                                 ></textarea>
                                                             </div>
 
+                                                            {negativeValue(values.monthlyRent) ||
+                                                        negativeValue(values.securityGuaranty) ||
+                                                        validator.isEmpty(String(values.monthlyRent)) ||
+                                                        validator.isEmpty(String(values.securityGuaranty)) ||
+                                                        validator.isEmpty(values.tenantName) ||
+                                                        validator.isEmpty(values.propertyName)
+                                                        ? (<button type="submit" className="btn btn-primary" disabled>{buttonTitle}</button>) :
+                                                        (<button type="submit" className="btn btn-primary">{buttonTitle}</button>)
+
+                                                        }
+
                                                            
-                                                            
-                                                            <button type="submit" className="btn btn-primary">{buttonTitle}</button>
                                                         </form>
                                                     </div>
                                                     

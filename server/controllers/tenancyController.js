@@ -99,6 +99,7 @@ function editTenancy(req, res, next){
     console.log("Edit Tenancy")
     console.log(tenancyId);
     console.log(contractNumber);
+    console.log(monthlyRent);
     console.log(securityGuaranty);
     console.log(startTenancy);
     console.log(endTenancy);
