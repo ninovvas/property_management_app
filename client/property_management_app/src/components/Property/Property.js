@@ -15,8 +15,7 @@ export const Property = ({propertyService}) => {
         }, []);
     return ( 
         <>
-         <NavigationMenu />
-            <Header />
+         
         <div className="pcoded-main-container">
         <div className="pcoded-wrapper">
             <div className="pcoded-content">
@@ -52,7 +51,7 @@ export const Property = ({propertyService}) => {
                                                 )}
 
                                                 {properties.length === 0 && (
-                                                    <h3 className="no-articles">No articles yet</h3>
+                                                    <h3 className="no-articles">No properties yet</h3>
                                                 )}
                                                         
 

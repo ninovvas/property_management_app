@@ -227,15 +227,20 @@ const onTenantEditSubmit = async (values) => {
       return (
         <AuthContext.Provider value={contextValues}>
           <>
+          {!!auth.accessToken ? 
+          (<> <NavigationMenu /> 
+          <Header /></>) : ("")}
+          
          
             <Routes>
               <Route path='*' element={<h1>404</h1>} />
-              <Route path='/' element={<Home />} />
+              <Route path='/' element={<Home propertyService={propertyService} tenantService={tenantService} tenancyService={tenancyService} />} />
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>
              
               <Route element={<RouteGuard />}>
-                <Route path='/dashboard' element={<Dashboard />}></Route>
+                <Route path='/logout' element={<Logout />}></Route>
+                <Route path='/dashboard' element={<Dashboard propertyService={propertyService} tenantService={tenantService} tenancyService={tenancyService} />}></Route>
                 <Route path='/logout' element={<Logout />}></Route>
                 <Route path='/property/' element={<Property propertyService={propertyService}/>}></Route>
                 <Route path='/create_property/' element={<CreateObject />}></Route>

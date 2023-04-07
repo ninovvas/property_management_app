@@ -77,8 +77,7 @@ export const EditTenancy = ({
    
     return(
         <>
-        <NavigationMenu />
-                <Header />
+        
         <div className="pcoded-main-container">
             <div className="pcoded-wrapper">
                 <div className="pcoded-content">

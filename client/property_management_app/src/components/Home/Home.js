@@ -4,13 +4,17 @@ import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AutoContext';
 import { Dashboard } from '../Dashboard/Dashboard';
 
-export const Home = () => {
+export const Home = ({
+  propertyService,
+  tenantService,
+  tenancyService
+}) => {
   const {isAuthenticated} = useContext(AuthContext);
 
   const navigate = useNavigate();
     return (
       <>
-        {isAuthenticated ? (<Dashboard/>):
+        {isAuthenticated ? (<Dashboard propertyService={propertyService} tenantService={tenantService} tenancyService={tenancyService}/>):
         (<>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <a className="navbar-brand" href="#">Property Management</a>

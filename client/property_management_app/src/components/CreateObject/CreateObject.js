@@ -53,8 +53,7 @@ export const CreateObject = () => {
     case 1:
       return (
         <>
-        <NavigationMenu />
-        <Header />
+       
         <Address nextStep={nextStep} handleFormData={handleInputData} values={formData} />
         </>
            
@@ -63,16 +62,14 @@ export const CreateObject = () => {
     case 2:
       return (
         <>
-            <NavigationMenu />
-            <Header />
+            
             <Object nextStep={nextStep} prevStep={prevStep} handleFormData={handleInputData} values={formData} />
         </>
       );
       case 3:
       return (
         <>
-            <NavigationMenu />
-            <Header />
+           
             <ObjectConfirm prevStep={prevStep} values={formData} titleButton={titleButton} action={action}/>
         </>
       );

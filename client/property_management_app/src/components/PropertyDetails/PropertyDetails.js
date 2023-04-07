@@ -30,8 +30,7 @@ export const PropertyDetails = ({propertyService}) => {
 
     return(
     <>
-    <NavigationMenu />
-            <Header />
+    
     <div className="pcoded-main-container">
         <div className="pcoded-wrapper">
             <div className="pcoded-content">
@@ -64,8 +63,8 @@ export const PropertyDetails = ({propertyService}) => {
                                         </div>
                                         <div className="card-block">
                                             <p>City: {property.city}</p>
-                                            <Link to={`/property/edit/${property._id}`}><button type="button" class="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link>
-                                            {property.tenancies && property.tenancies.length === 0 ? (<button type="button" class="btn btn-danger" title="Delete" data-toggle="tooltip" onClick={onDeleteClick}>Delete</button>): ""}
+                                            <Link to={`/property/edit/${property._id}`}><button type="button" className="btn btn-warning" title="Edit" data-toggle="tooltip">Edit</button></Link>
+                                            {property.tenancies && property.tenancies.length === 0 ? (<button type="button" className="btn btn-danger" title="Delete" data-toggle="tooltip" onClick={onDeleteClick}>Delete</button>): ""}
                                         </div>
                                         
                                     </div>

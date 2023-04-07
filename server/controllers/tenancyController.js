@@ -27,6 +27,12 @@ function getAllTenancies(req, res, next) {
     tenancyModel.find({userId})
         .sort({ created_at: -1 })
         //.populate('thumbnailId userId')
+        .populate({
+            path : 'tenantId',
+          })
+          .populate({
+            path : 'propertyId'
+          })
         .then(tenancies => {
             res.status(200).json(tenancies)
         })

@@ -39,8 +39,7 @@ export const TenancyDetails = ({tenancyService}) => {
 
     return(
     <>
-    <NavigationMenu />
-            <Header />
+   
     <div className="pcoded-main-container">
         <div className="pcoded-wrapper">
             <div className="pcoded-content">
@@ -51,7 +50,7 @@ export const TenancyDetails = ({tenancyService}) => {
                             <div className="row align-items-center">
                                 <div className="col-md-12">
                                     <div className="page-header-title">
-                                        <h5 className="m-b-10">Property Details</h5>
+                                        <h5 className="m-b-10">Tenancy Details</h5>
                                     </div>
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
