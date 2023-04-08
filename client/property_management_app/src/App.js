@@ -24,6 +24,7 @@ import { Profile } from './components/Profile/Profile';
 import { EditProfile } from './components/EditProfile/EditProfile';
 import { ErrorMessages } from './components/ErrorMessages/ErrorMessages';
 import { PropertyProvider, usePropertyContext } from './contexts/PropertyContext';
+import { Suspense } from 'react';
 
 function App() {
 
@@ -31,13 +32,13 @@ function App() {
       return (
         <AuthProvider>
           <PropertyProvider>
-
+          
             <Routes>
-            <Route path='*' element={<ErrorMessages />} />
+              <Route path='*' element={<ErrorMessages />} />
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>
-             
+              
               <Route element={<RouteGuard />}>
                 <Route path='/logout' element={<Logout />}></Route>
                 <Route path='/dashboard' element={<Dashboard />}></Route>
@@ -59,7 +60,7 @@ function App() {
               </Route>
               
             </Routes>
-          
+           
           </PropertyProvider>
         </AuthProvider>
 
