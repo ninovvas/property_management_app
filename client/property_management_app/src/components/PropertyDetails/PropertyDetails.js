@@ -1,13 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AutoContext";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
 import "./PropertyDetails.Module.css"
 
 
-export const PropertyDetails = ({propertyService}) => {
+export const PropertyDetails = ({
+    // propertyService
+}) => {
+    const { propertyService} = usePropertyContext();
+    
     const { propertyId } = useParams();
-    const { userId, isAuthenticated} = useContext(AuthContext);
+    // const { userId, isAuthenticated} = useContext(AuthContext);
     const navigate = useNavigate();
     const [property, setProperty] = useState({});
 

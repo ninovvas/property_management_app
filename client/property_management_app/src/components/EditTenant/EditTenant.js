@@ -1,16 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 import { useForm } from "../../hooks/useForm";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 import validator from "validator";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
 export const EditTenant = ({
-    tenantService
+//    tenantService
 }) => {
-
-    const { userId, onTenantEditSubmit } = useContext(AuthContext);
+    const { tenantService, onTenantEditSubmit} = usePropertyContext();
+    //const { userId, onTenantEditSubmit } = useContext(AuthContext);
+    const { userId } = useAuthContext(AuthContext);
     const { tenantId } = useParams();
 
     const buttonTenant = "Edit Tenant"

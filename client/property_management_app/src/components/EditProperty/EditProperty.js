@@ -5,12 +5,17 @@ import { NavigationMenu } from "../Navigation/NavigationMenu";
 import { Header } from "../Header/Header";
 import { Address } from "../CreateObject/Address/Address";
 import { Object } from "../CreateObject/Object/Object";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 import { ObjectConfirm } from "../CreateObject/ObjectConfirm/ObjectConfirm";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
 
-export const EditProperty = ({propertyService}) => {
-    const { userId } = useContext(AuthContext);
+export const EditProperty = ({
+  // propertyService
+}) => {
+    const {propertyService} = usePropertyContext();
+    // const { userId } = useContext(AuthContext);
+    const { userId } = useAuthContext();
     const { propertyId } = useParams();
     console.log(propertyId);
 

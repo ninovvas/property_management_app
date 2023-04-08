@@ -5,8 +5,13 @@ import { NavigationMenu } from "../Navigation/NavigationMenu";
 import { PropertyItem } from "./PropertyItem/PropertyItem";
 
 import "./Property.Module.css"
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
-export const Property = ({propertyService}) => {
+export const Property = ({
+    // propertyService
+}) => {
+    const {propertyService} = usePropertyContext();
+    
     const [properties, setProperties] = useState([]);
 
     useEffect(() => {

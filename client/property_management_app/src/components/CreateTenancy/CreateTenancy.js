@@ -6,12 +6,15 @@ import { useForm } from "../../hooks/useForm";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 import { negativeValue } from "../../utils/negativeValue";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
 export const CreateTenancy = ({
-    tenantService,
-    propertyService
+    // tenantService,
+    // propertyService
 
 }) => {
+
+    const {tenantService, propertyService } = usePropertyContext();
 
     const {userId, onTenancySubmit} = useContext(AuthContext);
     //const navigate = useNavigate();

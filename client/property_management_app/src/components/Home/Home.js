@@ -1,15 +1,19 @@
 import './Home.module.css'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AutoContext';
+import { AuthContext, useAuthContext } from '../../contexts/AutoContext';
 import { Dashboard } from '../Dashboard/Dashboard';
+import { usePropertyContext } from '../../contexts/PropertyContext';
 
 export const Home = ({
-  propertyService,
-  tenantService,
-  tenancyService
+  // propertyService,
+  // tenantService,
+  // tenancyService
 }) => {
-  const {isAuthenticated} = useContext(AuthContext);
+  //const {isAuthenticated} = useContext(AuthContext);
+  const {isAuthenticated} = useAuthContext();
+  const {propertyService, tenantService, tenancyService} = usePropertyContext();
+  
 
   const navigate = useNavigate();
     return (

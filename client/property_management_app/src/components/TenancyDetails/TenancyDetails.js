@@ -1,14 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AutoContext";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 import { formatDate } from "../../utils/formatData";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 
 
-export const TenancyDetails = ({tenancyService}) => {
+export const TenancyDetails = ({
+    //tenancyService
+}) => {
+    const {tenancyService} = usePropertyContext();
     const { tenancyId } = useParams();
-    const { userId, isAuthenticated} = useContext(AuthContext);
+    //const { userId, isAuthenticated} = useContext(AuthContext);
     const navigate = useNavigate();
     const [tenancy, setTenancy] = useState({});
 

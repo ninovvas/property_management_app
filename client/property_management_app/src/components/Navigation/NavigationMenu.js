@@ -10,7 +10,7 @@ export const NavigationMenu = () => {
                        </div>
                        <span className="b-title">Property Manager</span>
                    </Link>
-                   <a className="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+                   <Link className="mobile-menu" id="mobile-collapse" to={"javascript:"}><span></span></Link>
                </div>
                 <div className="navbar-content scroll-div">
                     <ul className="nav pcoded-inner-navbar">

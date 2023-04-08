@@ -1,16 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import validator from "validator";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 import { useForm } from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 import { confirmPassword } from "../../utils/confirmPassword";
 import { isCorrectPassword } from "../../utils/isCorrectPassword";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
 export const EditProfile = ({
-    profileService
+    // profileService
 }) => {
-
-    const {onEditProfileSubmit, serverErrors, userId} = useContext(AuthContext);
+    const {profileService, onEditProfileSubmit} = usePropertyContext();
+    const {serverErrors, userId} = useAuthContext();
+    // const {onEditProfileSubmit, serverErrors, userId} = useContext(AuthContext);
 
     const { values, changeHandler, onSubmit, changeValues} = useForm({
         username: '',

@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { TenancyItem } from "./TenancyItem/TenancyItem";
 import { Link } from "react-router-dom";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
-export const TenancyList = ({tenancyService}) => {
+export const TenancyList = ({
+    // tenancyService
+}) => {
+    const {tenancyService} = usePropertyContext();
+    
     const [tenancies, setTenancies] = useState([]);
 
     useEffect(() => {

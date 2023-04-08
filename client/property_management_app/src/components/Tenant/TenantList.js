@@ -5,8 +5,12 @@ import { TenantItem } from "./TenantItem/TenantItem";
 import { Link } from "react-router-dom";
 
 import "./TenantList.Module.css"
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
-export const TenantList = ({tenantService}) => {
+export const TenantList = ({
+    // tenantService
+}) => {
+    const {tenantService} = usePropertyContext();
     const [tenants, setTenants] = useState([]);
 
     useEffect(() => {

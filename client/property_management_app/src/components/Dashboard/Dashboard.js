@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
 import { DashboardPropertyItem } from "./DashboardPropertyItem/DashboardPropertyItem";
@@ -6,10 +7,12 @@ import { DashboardTenancyItem } from "./DashboardTenancyItem/DashboardTenancyIte
 import { DashboardTenantItem } from "./DashboardTenantItem/DashboardTenantItem";
 
 export const Dashboard = ({
-    propertyService,
-    tenantService,
-    tenancyService
+    // propertyService,
+    // tenantService,
+    // tenancyService
 }) => {
+
+    const {propertyService, tenantService, tenancyService } = usePropertyContext();
 
     const [properties, setProperties] = useState([]);
     const [tenants, setTenants] = useState([]);

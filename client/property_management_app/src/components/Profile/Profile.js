@@ -1,14 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import validator from "validator";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 import { useForm } from "../../hooks/useForm";
 import { Link, useParams } from "react-router-dom";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
 export const Profile = ({
-    profileService
+    // profileService
 }) => {
-
-    const { userId } = useContext(AuthContext);
+    const {profileService} = usePropertyContext()
+    //const { userId } = useContext(AuthContext);
+    const { userId } = useAuthContext();
     const { profileId } = useParams();
     const [profile, setProfile] = useState({});
 
