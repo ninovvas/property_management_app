@@ -6,6 +6,8 @@ import { DashboardPropertyItem } from "./DashboardPropertyItem/DashboardProperty
 import { DashboardTenancyItem } from "./DashboardTenancyItem/DashboardTenancyItem";
 import { DashboardTenantItem } from "./DashboardTenantItem/DashboardTenantItem";
 
+import "./Dashboard.Module.css"
+
 export const Dashboard = ({
     // propertyService,
     // tenantService,
@@ -135,7 +137,7 @@ export const Dashboard = ({
                                                         )}
 
                                                         {properties.length === 0 && (
-                                                            <h3 className="no-articles">No properties yet</h3>
+                                                            <h3 className="no-articles no_content">No properties yet</h3>
                                                         )}
                                                     </tbody>
                                                 </table>
@@ -158,7 +160,7 @@ export const Dashboard = ({
                                                         )}
 
                                                         {tenants.length === 0 && (
-                                                            <h3 className="no-articles">No tenants yet</h3>
+                                                            <h3 className="no-articles no_content">No tenants yet</h3>
                                                         )}
                                                     </tbody>
                                                 </table>
@@ -181,7 +183,7 @@ export const Dashboard = ({
                                                         )}
 
                                                         {tenancies.length === 0 && (
-                                                            <h3 className="no-articles">No tenants yet</h3>
+                                                            <h3 className="no-articles no_content">No tenants yet</h3>
                                                         )}
                                                     </tbody>
                                                 </table>

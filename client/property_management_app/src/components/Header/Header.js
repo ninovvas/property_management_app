@@ -15,7 +15,7 @@ export const Header = () => {
                    <div className="b-bg">
                        <i className="feather icon-trending-up"></i>
                    </div>
-                   <span className="b-title">Property Management</span>
+                   <span className="b-title">Property Manager</span>
                </Link>
         </div>
         <Link className="mobile-menu" id="mobile-header" to={"javascript:"}>

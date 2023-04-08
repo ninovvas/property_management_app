@@ -1,11 +1,15 @@
 
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AutoContext";
+import { usePropertyContext } from "../../../contexts/PropertyContext";
 
 
-export const ObjectConfirm = ({prevStep, values, titleButton, action}) => {
+export const ObjectConfirm = ({prevStep, values, titleButton, action, titles}) => {
     
-    const { onCreatePropertySubmit, onEditPropertySubmit } = useContext(AuthContext);
+    //const { onCreatePropertySubmit, onEditPropertySubmit } = useContext(AuthContext);
+
+    const {onCreatePropertySubmit, onEditPropertySubmit } = usePropertyContext();
   
 
 
@@ -29,6 +33,24 @@ export const ObjectConfirm = ({prevStep, values, titleButton, action}) => {
         <div className="pcoded-wrapper">
             <div className="pcoded-content">
                 <div className="pcoded-inner-content">
+                <div className="page-header">
+                        <div className="page-block">
+                            <div className="row align-items-center">
+                                <div className="col-md-12">
+                                    <div className="page-header-title">
+                                        <h5 className="m-b-10">{titles.h5Title}</h5>
+                                    </div>
+                                    <ul className="breadcrumb">
+                                        <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/property"}>My Properties</Link></li>
+                                        {action === "edit" ? (<li className="breadcrumb-item"><Link to={`/property/details/${values._id}`}>{titles.detailTitle}</Link></li>) : 
+                                        ("")}
+                                        <li className="breadcrumb-item"><Link to={"#"}>{titles.currentTitle}</Link></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className="main-body">
                         <div className="page-wrapper">
                             <div className="row">

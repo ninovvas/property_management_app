@@ -20,3 +20,27 @@ footer {
 footer p{
     padding-top: 19px;;
 }
+
+.container{
+    /* display: flex;
+    justify-content: space-between; */
+    /* background-color: rgb(179, 245, 214); */
+    background-color: rgba(51, 153, 255, 0.2);
+    width: 350px;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 24px;
+}
+
+h4 {
+    color: rgba(255, 255, 255);
+    padding: 15px 15px;
+}
+
+.buttons {
+    padding: 25px 15px;
+    text-align: center;
+}

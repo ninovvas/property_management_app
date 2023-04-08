@@ -1,4 +1,4 @@
-import './Home.module.css'
+import './Home.Module.css'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext, useAuthContext } from '../../contexts/AutoContext';
@@ -21,9 +21,7 @@ export const Home = ({
         {isAuthenticated ? (<Dashboard propertyService={propertyService} tenantService={tenantService} tenancyService={tenancyService}/>):
         (<>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">Property Management</a>
-       
-      
+            <Link className="navbar-brand" to={"/"}>Property Manager</Link>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto"></ul>
           <Link to={'/login'}><button className="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button></Link>
@@ -31,12 +29,20 @@ export const Home = ({
         </div>
       </nav>
       <main>
-        <div class="box_home">
-
+      <div className="container">
+        <div>
+        <h4>Property manager support you to manege your objects and tenancies. To use the Property Manager you have to login or sign up. </h4>
         </div>
+        <div className='buttons'>
+          <Link to={'/login'}><button className="btn btn-success" type="submit">Login</button></Link>
+          <Link to={'/register'}><button className="btn btn-success " type="submit">Registration</button></Link>
+        </div>
+         
+      </div>
+            
       </main>
       <footer>
-        <p>Thsi is only a test</p>
+        <p>Property Manager developt by Vasil Ninov</p>
       </footer>
       </>)
     }

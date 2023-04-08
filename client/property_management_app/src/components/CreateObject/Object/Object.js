@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import validator from "validator";
 
 import "./Object.module.css"
 
-export const Object = ({ nextStep, handleFormData, prevStep, values }) => {
+export const Object = ({ nextStep, handleFormData, prevStep, values, action, titles}) => {
     //creating error state for validation
     const [error, setError] = useState(false);
 
@@ -43,20 +44,40 @@ export const Object = ({ nextStep, handleFormData, prevStep, values }) => {
         <div className="pcoded-wrapper">
             <div className="pcoded-content">
                 <div className="pcoded-inner-content">
+
+                <div className="page-header">
+                        <div className="page-block">
+                            <div className="row align-items-center">
+                                <div className="col-md-12">
+                                    <div className="page-header-title">
+                                        <h5 className="m-b-10">{titles.h5Title}</h5>
+                                    </div>
+                                    <ul className="breadcrumb">
+                                        <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
+                                        <li className="breadcrumb-item"><Link to={"/property"}>My Properties</Link></li>
+                                        {action === "edit" ? (<li className="breadcrumb-item"><Link to={`/property/details/${values._id}`}>{titles.detailTitle}</Link></li>) : 
+                                        ("")}
+                                        <li className="breadcrumb-item"><Link to={"#"}>{titles.currentTitle}</Link></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="main-body">
                         <div className="page-wrapper">
                             <div className="row">
                                 <div className="col-sm-12">
                                     <div className="card">
                                         <div className="card-body">
-                                            <h5>Object</h5>
+                                            <h5>Property</h5>
                                             <div className="row">
                                                 <div className="col-md-6">
                                                     <form onSubmit={submitFormData}>
                                                         
                                                     <div className="form-row">
                                                         <div className="col">
-                                                                <label label forHtml="country">Your relationship to this object</label>
+                                                                <label label forHtml="country">Your relationship to this property</label>
                                                                 <select 
                                                                     className={validator.isEmpty(values.objectRelation) && errors.errObjectRelation ? "form-control is-invalid": "form-control"}
                                                                     id="objectRelation" 
