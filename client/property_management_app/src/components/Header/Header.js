@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 
 import "./Header.Module.css"
 
 export const Header = () => {
-    const { firstName, lastName, userId } = useContext(AuthContext);
+    //const { firstName, lastName, userId } = useContext(AuthContext);
+    const { firstName, lastName, userId } = useAuthContext();
 
     return (
     <header className="navbar pcoded-header navbar-expand-lg navbar-light">

@@ -1,12 +1,13 @@
 import { useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 //import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 
 //import * as authService from '../../services/authService';
 
 export const Logout = () => {
-    const { onLogout } = useContext(AuthContext);
+    //const { onLogout } = useContext(AuthContext);
+    const { onLogout } = useAuthContext();
 
     useEffect(() => {
         onLogout();

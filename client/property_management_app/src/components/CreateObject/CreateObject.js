@@ -5,11 +5,13 @@ import { NavigationMenu } from "../Navigation/NavigationMenu";
 import { Address } from "./Address/Address";
 import { Object } from "./Object/Object";
 import { ObjectConfirm } from "./ObjectConfirm/ObjectConfirm";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 
 
 export const CreateObject = () => {
-    const { userId } = useContext(AuthContext);
+    //const { userId } = useContext(AuthContext);
+    const { userId } = useAuthContext();
+  
 
     const titleButton= "Create Property";
     const action = "create";

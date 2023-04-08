@@ -5,13 +5,14 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import validator from "validator";
 
-import {AuthContext} from "../../contexts/AutoContext"
+import {AuthContext, useAuthContext} from "../../contexts/AutoContext"
 import { useForm } from "../../hooks/useForm";
 import { isCorrectPassword } from "../../utils/isCorrectPassword";
 
 
 export const Login = () => {
-    const { onLoginSubmit, serverErrors } = useContext(AuthContext);
+    //const { onLoginSubmit, serverErrors } = useContext(AuthContext);
+    const { onLoginSubmit, serverErrors } = useAuthContext();
 
     
     const { values, changeHandler, onSubmit } = useForm({

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import validator from "validator";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 import { useForm } from "../../hooks/useForm";
 import { Header } from "../Header/Header";
 import { NavigationMenu } from "../Navigation/NavigationMenu";
@@ -14,9 +14,10 @@ export const CreateTenancy = ({
 
 }) => {
 
-    const {tenantService, propertyService } = usePropertyContext();
+    const {tenantService, propertyService, onTenancySubmit } = usePropertyContext();
+    const {userId} = useAuthContext();
 
-    const {userId, onTenancySubmit} = useContext(AuthContext);
+    //const {userId, onTenancySubmit} = useContext(AuthContext);
     //const navigate = useNavigate();
 
     const buttonTitle="Create new Tenancy"
@@ -100,7 +101,7 @@ export const CreateTenancy = ({
                                         </div>
                                         <ul className="breadcrumb">
                                             <li className="breadcrumb-item"><Link to={"/dashboard"}><i className="feather icon-home"></i></Link></li>
-                                            <li className="breadcrumb-item"><Link to={"/tenancies"}>My Tenancies</Link></li>
+                                            <li className="breadcrumb-item"><Link to={"/tenancy"}>My Tenancies</Link></li>
                                             <li className="breadcrumb-item"><Link to={"#"}>Create Tenancy</Link></li>
                                         </ul>
                                     </div>

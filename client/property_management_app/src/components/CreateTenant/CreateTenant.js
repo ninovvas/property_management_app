@@ -1,13 +1,16 @@
 import { useContext, useState } from "react";
 import validator from "validator";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 import { useForm } from "../../hooks/useForm";
+import { usePropertyContext } from "../../contexts/PropertyContext";
 
 
 export const CreateTenant = () => {
 
-    const {userId, onTenantSubmit} = useContext(AuthContext);
+    //const {userId, onTenantSubmit} = useContext(AuthContext);
+    const {userId } = useAuthContext(AuthContext);
+    const {onTenantSubmit} = usePropertyContext();
     //const navigate = useNavigate();
 
     const buttonTenant="Create new Tenant"

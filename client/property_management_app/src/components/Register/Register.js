@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../contexts/AutoContext";
+import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
 import { Link } from "react-router-dom";
 import validator from "validator";
 
@@ -9,7 +9,8 @@ import { isCorrectPassword } from "../../utils/isCorrectPassword";
 import { confirmPassword } from "../../utils/confirmPassword";
 
 export const Register = () =>{
-    const {onRegisterSubmit, serverErrors} = useContext(AuthContext);
+    //const {onRegisterSubmit, serverErrors} = useContext(AuthContext);
+    const {onRegisterSubmit, serverErrors} = useAuthContext();
 
     const { values, changeHandler, onSubmit } = useForm({
         username: '',
