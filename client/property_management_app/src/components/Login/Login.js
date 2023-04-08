@@ -41,7 +41,7 @@ export const Login = () => {
     return (
         <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Link className="navbar-brand" to={"/home"}>Property Management</Link>
+            <Link className="navbar-brand" to={"/"}>Property Manager</Link>
    
   
             <div className="collapse navbar-collapse" id="navbarSupportedContent">

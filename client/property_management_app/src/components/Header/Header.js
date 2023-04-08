@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext, useAuthContext } from "../../contexts/AutoContext";
+import { useAuthContext } from "../../contexts/AutoContext";
 
 import "./Header.Module.css"
 

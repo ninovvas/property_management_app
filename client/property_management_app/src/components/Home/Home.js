@@ -5,17 +5,12 @@ import { AuthContext, useAuthContext } from '../../contexts/AutoContext';
 import { Dashboard } from '../Dashboard/Dashboard';
 import { usePropertyContext } from '../../contexts/PropertyContext';
 
-export const Home = ({
-  // propertyService,
-  // tenantService,
-  // tenancyService
-}) => {
+export const Home = () => {
   //const {isAuthenticated} = useContext(AuthContext);
   const {isAuthenticated} = useAuthContext();
   const {propertyService, tenantService, tenancyService} = usePropertyContext();
-  
-
   const navigate = useNavigate();
+
     return (
       <>
         {isAuthenticated ? (<Dashboard propertyService={propertyService} tenantService={tenantService} tenancyService={tenancyService}/>):

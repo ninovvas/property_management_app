@@ -99,17 +99,12 @@ export const PropertyProvider = ({
   
   const onTenantEditSubmit = async (values) => {
     const result = await tenantService.editTenant(values._id, values);
-  
-    //setGames(state => state.map(x => x._id === values._id ? result : x))
-    
-  
+
     navigate(`/tenant/details/${values._id}`);
   }
 
   const contextValues = {
-    // onLoginSubmit,
-    // onRegisterSubmit,
-    // onLogout,
+    
     onCreatePropertySubmit,
     onEditPropertySubmit,
     onTenantSubmit,
@@ -121,13 +116,7 @@ export const PropertyProvider = ({
     propertyService,
     tenancyService,
     tenantService,
-    // serverErrors,
-    // firstName: auth.first_name,
-    // lastName: auth.last_name,
-    // address: auth.address,
-    // userId: auth._id,
-    // token: auth.accessToken,
-    // isAuthenticated: !!auth.accessToken,
+    
   }
 
   return (
